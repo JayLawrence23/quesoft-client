@@ -1,7 +1,7 @@
 import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Grid, Paper, Slide, Typography, AccordionDetails, AccordionSummary, Accordion, Chip } from '@material-ui/core';
 import { ToggleButton, ToggleButtonGroup } from '@material-ui/lab/';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
@@ -12,8 +12,9 @@ import Controls from '../../Components/Controls/Controls';
 import Layout from '../../Components/Layout';
 import Ticket from '../../Components/Ticket';
 import { Form, useForm } from '../../Components/useForm'
-import { socket } from '../../Socket';
+// import { socket } from '../../Socket';
 import useStyles from './styles/virtualmonitoring';
+import { SocketContext } from '../../Socket';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
@@ -22,7 +23,8 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 
 const VirtualMonitoring = () => {
-
+    const {socket} = useContext(SocketContext)
+console.log('socket', socket)
     const classes = useStyles();
 
     const dispatch = useDispatch();
@@ -112,35 +114,41 @@ const VirtualMonitoring = () => {
        
     }
 
-    socket.once('complete', message => {
+    useEffect(() => {
+        console.log('socket', socket)
+      if(!socket) return
+      console.log('registering events on socket')
+      socket.on('complete', (message) => {
+        console.log('complete');
         dispatch(getTransactions());
         dispatch(monitorTicket(value));
-    })
+      });
 
-    socket.once('call', message => {
+      socket.on('call', (message) => {
+        console.log('call');
         dispatch(getTransactions());
         dispatch(monitorTicket(value));
-    })
+      });
 
-    socket.off('call', message => {
+      socket.off('call', (message) => {
         dispatch(getTransactions());
         dispatch(monitorTicket(value));
-    })
+      });
 
-    socket.off('complete', message => {
+      socket.off('complete', (message) => {
         dispatch(getTransactions());
         dispatch(monitorTicket(value));
-    })
+      });
 
+      // useEffect(()=> {
+      //     socket.on("queuing",() => {
+      //         dispatch(getTransactions());
+      //     dispatch(monitorTicket(value));
+      //     });
 
-    // useEffect(()=> {
-    //     socket.on("queuing",() => {
-    //         dispatch(getTransactions());
-    //     dispatch(monitorTicket(value));
-    //     });
-    
-    //     return () => socket.off("queuing");
-    // },[]);
+      //     return () => socket.off("queuing");
+      // },[]);
+    }, [socket]);
    
     return (
         <Layout>

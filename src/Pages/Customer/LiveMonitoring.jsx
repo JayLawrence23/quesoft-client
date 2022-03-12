@@ -1,5 +1,5 @@
 import { Grid, Paper, Typography } from '@material-ui/core';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAdvertisement } from '../../Actions/admin';
 import { leaveQueuing } from '../../Actions/services';
@@ -7,11 +7,12 @@ import { getTransactions, leaveQueuesWaiting } from '../../Actions/transaction';
 import qaudio from '../../Assets/Audio/queuing-sound.wav';
 import ads from '../../Assets/Images/ads.jpeg';
 import Layout from '../../Components/Layout';
-import { socket } from '../../Socket';
+import { SocketContext } from '../../Socket';
+// import { socket } from '../../Socket';
 import useStyles from './styles/livemonitoring';
 
 const LiveMonitoring = () => {
-
+    const {socket} = useContext(SocketContext)
     const classes = useStyles();
     const dispatch = useDispatch();
 
@@ -35,47 +36,40 @@ const LiveMonitoring = () => {
     //     dispatch(getTicketData(user.result._id));
     // }, [location]) 
 
-    // socket.once('generateticket', message => {
-    //     dispatch(getTransactions());
-    // })
-
-    // socket.once('arrived', message => {
-    //     dispatch(getTransactions());
-    // })
-
-    // socket.once('complete', message => {
-    //     dispatch(getTransactions());
-    // })
+    useEffect(() => {
+        if(!socket) return
+      socket.on('generateticket', message => {
+          dispatch(getTransactions());
+      })
+      socket.on('arrived', message => {
+          dispatch(getTransactions());
+      })
+      socket.on('complete', message => {
+          dispatch(getTransactions());
+      })
+      socket.on('leave', message => {
+          dispatch(getTransactions());
+      })
+      socket.on("call",() => {
+          dispatch(getTransactions());
+      });
+      socket.on("call",() => {
+          dispatch(getTransactions());
+      });
+      socket.on('generateticket', message => {
+          dispatch(getTransactions());
+      })
+      socket.on('arrived', message => {
+          dispatch(getTransactions());
+      })
+      socket.on('complete', message => {
+          dispatch(getTransactions());
+      })
+      socket.on('leave', message => {
+          dispatch(getTransactions());
+      })
+    }, [socket])
     
-    // socket.once('leave', message => {
-    //     dispatch(getTransactions());
-    // })
-
-    // socket.once("call",() => {
-    //     dispatch(getTransactions());
-    // });
-
- 
-    // socket.off("call",() => {
-    //     dispatch(getTransactions());
-    // });
-
-    
-    // socket.off('generateticket', message => {
-    //     dispatch(getTransactions());
-    // })
-
-    // socket.off('arrived', message => {
-    //     dispatch(getTransactions());
-    // })
-
-    // socket.off('complete', message => {
-    //     dispatch(getTransactions());
-    // })
-    
-    // socket.off('leave', message => {
-    //     dispatch(getTransactions());
-    // })
 
     //End of socket
   

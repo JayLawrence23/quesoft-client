@@ -80,14 +80,18 @@ export const missedCustomer = async (values) => {
     }
 }
 
-export const queuingComplete = (values) => async (dispatch) => {
+export const queuingComplete = (values,valuescounter) => async (dispatch) => {
     
     try {
-        const { data } = await api.queuingComplete(values);
+      const { data } = await api.queuingComplete(values);
 
-        dispatch({type: FETCH_TICKET_COUNTERSTAFFS, payload: data});
+      dispatch({ type: FETCH_TICKET_COUNTERSTAFFS, payload: data });
+      if (valuescounter) {
+        dispatch(callCustomer(valuescounter));
+        dispatch(ticketOnCounterStaff(valuescounter));
+      }
     } catch (error) {
-        console.log(error.message);
+      console.log(error.message);
     }
 }
 

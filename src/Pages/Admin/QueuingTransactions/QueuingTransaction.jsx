@@ -2,18 +2,19 @@
 //Material
 import { InputAdornment, makeStyles, Paper, TableBody, TableCell, TableRow, Toolbar } from '@material-ui/core';
 import { Search } from "@material-ui/icons";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from 'react';
 import ReceiptOutlinedIcon from '@material-ui/icons/ReceiptOutlined';
 import BackupOutlinedIcon from '@material-ui/icons/BackupOutlined';
 import { useDispatch, useSelector } from 'react-redux';
 import { getTransactions } from "../../../Actions/transaction";
-import { socket } from '../../../Socket';
+// import { socket } from '../../../Socket';
 //Components
 import AdminLayout from "../../../Components/AdminLayout";
 import Controls from '../../../Components/Controls/Controls';
 import PageHeader from "../../../Components/PageHeader";
 import useTable from '../../../Components/useTable';
 import backup from '../../../Assets/Images/queuing_system.gzip'
+import { SocketContext } from '../../../Socket';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -60,7 +61,7 @@ const headCells = [
 
 
 const QueuingTransaction = () => {
-
+    const {socket} = useContext(SocketContext)
     const classes = useStyles();
     const dispatch = useDispatch();
     const [filterFn, setFilterFn] = useState({ fn: items => { return items; } })
@@ -71,9 +72,12 @@ const QueuingTransaction = () => {
         dispatch(getTransactions());
     }, [dispatch]);
 
-    socket.once('complete', message => {
-        dispatch(getTransactions());
-    })
+    useEffect(() => {
+      if(!socket) return
+      socket.on('complete', message => {
+          dispatch(getTransactions());
+        })
+    }, [socket])
 
     const downloadFile = () => {
         window.location.href = "D:/Jay-J/Documents/queuing-system/server/public/queuing_system.gzip"

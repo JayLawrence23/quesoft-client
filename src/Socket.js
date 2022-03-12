@@ -1,3 +1,36 @@
-import io from 'socket.io-client';
+import { createContext, useContext, useEffect, useState } from 'react';
+import socketIo from 'socket.io-client';
 
-export const socket = io('ws://quesoft.herokuapp.com');
+export const SocketContext = createContext();
+
+export const SocketProvider = (props) => {
+  const [socket, setSocket] = useState();
+
+  //* socket connection
+  useEffect(() => {
+    const newSocket = socketIo.connect('ws://localhost:5000', {
+      transports: ['websocket'],
+    });
+
+    if (!newSocket) return;
+    newSocket.on('connect', () => {
+      console.log(`Hurrah newSocket ${newSocket.id} Connected`);
+      setSocket(newSocket);
+    });
+
+    newSocket.on('complete', () => {
+      console.log(`Complete`);
+    });
+  }, []);
+
+  return (
+    <SocketContext.Provider
+      displayName='Socket Context'
+      value={{
+        socket,
+      }}
+    >
+      {props.children}
+    </SocketContext.Provider>
+  );
+};

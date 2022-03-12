@@ -1,12 +1,13 @@
 import { Box, makeStyles, Paper, Typography } from '@material-ui/core';
-import { useEffect, useState } from 'react';
+import { useEffect, useState ,useContext} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import { getService, getServiceByName } from '../Actions/services';
 import { countCounterByService } from '../Actions/counters';
 import logo from '../Assets/Images/logo-que.png';
 import Qrcode from 'qrcode.react';
-import { socket } from '../Socket';
+import { SocketContext } from '../Socket';
+// import { socket } from '../Socket';
 
 const useStyles = makeStyles((theme) => ({
 
@@ -75,7 +76,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Ticket = ( { ticketNo, serviceName, isQRShow, predictedWait, code, email}) => {
-
+    const {socket} = useContext(SocketContext)
     const classes = useStyles();
     const {service} = useSelector((state) => state.services)
     const dispatch = useDispatch();

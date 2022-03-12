@@ -10,12 +10,15 @@ import reducers from './Reducers'
 import App from './App';
 
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
+import { SocketProvider } from './Socket';
 
 const store = createStore(reducers, compose(applyMiddleware(thunk)))
 
 ReactDOM.render(
     <Provider store={store}>
+        <SocketProvider>
         <App />
+        </SocketProvider>
     </Provider>, 
     document.getElementById('root')
 );
