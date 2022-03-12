@@ -99,6 +99,14 @@ const Ticket = ( { ticketNo, serviceName, isQRShow, predictedWait, code, email})
         //eslint-disable-next-line
     }, [])
 
+    
+    useEffect(() => {
+      if (!socket) return;
+      if (predictedWait === 2) {
+        socket.emit('thirdIndex', 'test');
+      }
+    }, [socket, predictedWait]);
+
     function timeConvert(n) {
         let num = n;
         let hours = (num / 60);
@@ -142,12 +150,6 @@ const Ticket = ( { ticketNo, serviceName, isQRShow, predictedWait, code, email})
     let lessTime = new Date(currentDate.getTime() + (computedPredTime - 3)*60000);
     let addTime = new Date(currentDate.getTime() + (computedPredTime + 3)*60000);
 
-    useEffect(() => {
-      if (!socket) return;
-      if (predictedWait === 2) {
-        socket.emit('thirdIndex', 'test');
-      }
-    }, [socket, predictedWait]);
     
    
 
