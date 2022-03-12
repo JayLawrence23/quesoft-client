@@ -1,7 +1,9 @@
 import axios from 'axios';
 
-// const API = axios.create({ baseURL: 'https://quesoft.herokuapp.com'});
-const API = axios.create({ baseURL: 'http://localhost:5000'});
+// const baseURL = 'http://localhost:5000';
+const baseURL = 'https://quesoft.herokuapp.com';
+
+const API = axios.create({ baseURL});
 
 // To help our auth middleware
 // 

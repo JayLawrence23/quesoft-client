@@ -1,6 +1,9 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 import socketIo from 'socket.io-client';
 
+// const baseURL = 'http://localhost:5000';
+const baseURL = 'https://quesoft.herokuapp.com';
+
 export const SocketContext = createContext();
 
 export const SocketProvider = (props) => {
@@ -8,7 +11,7 @@ export const SocketProvider = (props) => {
 
   //* socket connection
   useEffect(() => {
-    const newSocket = socketIo.connect('ws://localhost:5000', {
+    const newSocket = socketIo.connect(baseURL, {
       transports: ['websocket'],
     });
 
