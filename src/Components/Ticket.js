@@ -142,9 +142,14 @@ const Ticket = ( { ticketNo, serviceName, isQRShow, predictedWait, code, email})
     let lessTime = new Date(currentDate.getTime() + (computedPredTime - 3)*60000);
     let addTime = new Date(currentDate.getTime() + (computedPredTime + 3)*60000);
 
-    if(predictedWait === 2){
+    useEffect(() => {
+      if (!socket) return;
+      if (predictedWait === 2) {
         socket.emit('thirdIndex', 'test');
-    }
+      }
+    }, [socket, predictedWait]);
+    
+   
 
     return ( 
         <Paper className={classes.paperStyle}>
