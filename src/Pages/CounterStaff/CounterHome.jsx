@@ -130,10 +130,10 @@ const CounterHome = () => {
       if (!socket) return;
 
 
-    socket.on("call",() => {
+    socket.on("call", (message) => {
       dispatch(ticketOnCounterStaff(valuescounter));
     });
-    socket.on("arrived",() => {
+    socket.on("arrived", (message) => {
       dispatch(countWaitingByService(valuescounter));
     });
     socket.on('complete', (message) => {

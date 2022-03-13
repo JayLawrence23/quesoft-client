@@ -20,11 +20,9 @@ const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
 });
 
-
-
 const VirtualMonitoring = () => {
     const {socket} = useContext(SocketContext)
-console.log('socket', socket)
+    console.log('socket', socket)
     const classes = useStyles();
 
     const dispatch = useDispatch();
@@ -123,6 +121,10 @@ console.log('socket', socket)
         dispatch(getTransactions());
         dispatch(monitorTicket(value));
       });
+      socket.on('missed', (message) => {
+        dispatch(getTransactions());
+        dispatch(monitorTicket(value));
+      });
 
       socket.on('call', (message) => {
         console.log('call');
@@ -140,14 +142,6 @@ console.log('socket', socket)
         dispatch(monitorTicket(value));
       });
 
-      // useEffect(()=> {
-      //     socket.on("queuing",() => {
-      //         dispatch(getTransactions());
-      //     dispatch(monitorTicket(value));
-      //     });
-
-      //     return () => socket.off("queuing");
-      // },[]);
     }, [socket]);
    
     return (
