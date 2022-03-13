@@ -175,13 +175,13 @@ const Ticket = ( { ticketNo, serviceName, isQRShow, predictedWait, code, email})
                 </Typography>
                 { isQR ?
                 <>
-                    <Qrcode value={`https://quesoft-jaylawrence23.vercel.app/virtualmonitoring/${code}`} className={classes.qrcode}/>
+                    <Qrcode value={`https://quesoft.vercel.app/virtualmonitoring/${code}`} className={classes.qrcode}/>
                     
                     <div className={classes.bite} style={{ right: -12, bottom: '19%' }}></div>
                     <div className={classes.bite} style={{ left: -12, bottom: '19%'}}></div>
                     <Typography variant="caption" display="block" style={{ margin: '2rem 0'}} gutterBottom>
                         If you're not able to scan the QR code, <br/> Enter this code: <b> {code} </b> on <br /> 
-                        https://quesoft-jaylawrence23.vercel.app/code
+                        https://quesoft.vercel.app/code
                     </Typography>
                 </>
                 : null }

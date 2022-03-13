@@ -108,7 +108,7 @@ const ServiceForm = ( { id, edit }) => {
 
                 <Controls.Input
                     name="prefix"
-                    value={values.prefix || ""}
+                    value={values.prefix.toUpperCase() || ""}
                     label="Prefix (eg. CS)"
                     onChange={handleInputChange}
                     error={errors.prefix}

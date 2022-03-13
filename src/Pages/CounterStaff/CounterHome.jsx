@@ -129,81 +129,14 @@ const CounterHome = () => {
   useEffect(() => {
       if (!socket) return;
 
-    // socket.once('call', message => {
-    //     dispatch(ticketOnCounterStaff(valuescounter));
-    //     dispatch(countWaitingByService(valuescounter));
-    //     dispatch(countServedByService(valuescounter));
-    //     if(ticket) {
-    //         setIsServing(true);
-    //     } else {
-    //         setIsServing(false);
-    //     }
-    //     // eslint-disable-next-line
-    // })
 
-    // socket.once('complete', message => {
-    //     dispatch(ticketOnCounterStaff(valuescounter));
-    //     dispatch(countWaitingByService(valuescounter));
-    //     dispatch(countServedByService(valuescounter));
-    //     if(ticket) {
-    //         setIsServing(true);
-    //     } else {
-    //         setIsServing(false);
-    //     }
-    //     // eslint-disable-next-line
-    // })
-
-    // socket.once('generateticket', message => {
-    //     dispatch(countWaitingByService(valuescounter));
-    // })
-
-    // socket.off('call', message => {
-    //     dispatch(ticketOnCounterStaff(valuescounter));
-    //     dispatch(countWaitingByService(valuescounter));
-    //     dispatch(countServedByService(valuescounter));
-    //     if(ticket) {
-    //         setIsServing(true);
-    //     } else {
-    //         setIsServing(false);
-    //     }
-    //     // eslint-disable-next-line
-    // })
-
-    // socket.off('complete', message => {
-    //     dispatch(ticketOnCounterStaff(valuescounter));
-    //     dispatch(countWaitingByService(valuescounter));
-    //     dispatch(countServedByService(valuescounter));
-    //     if(ticket) {
-    //         setIsServing(true);
-    //     } else {
-    //         setIsServing(false);
-    //     }
-    //     // eslint-disable-next-line
-    // })
-
-    // socket.off('generateticket', message => {
-    //     dispatch(countWaitingByService(valuescounter));
-    // })
-
-    //end of socket
-
-    // useEffect(()=> {
-    //     socket.on("complete",() => {
-    //         dispatch(ticketOnCounterStaff(valuescounter));
-    //         dispatch(countWaitingByService(valuescounter));
-    //         dispatch(countServedByService(valuescounter));
-    //         if(ticket) {
-    //             setIsServing(true);
-    //         } else {
-    //             setIsServing(false);
-    //         }
-    //     });
-
-    //     return () => socket.off("complete");
-    // },[]);
-
-    socket.on('missqueue', (message) => {
-      // eslint-disable-next-line
+    socket.on("call",() => {
+      dispatch(ticketOnCounterStaff(valuescounter));
+    });
+    socket.on('complete', (message) => {
+      dispatch(ticketOnCounterStaff(valuescounter));
+    socket.on('missed', (message) => {
+      dispatch(ticketOnCounterStaff(valuescounter));
     });
   }, [socket])
   
