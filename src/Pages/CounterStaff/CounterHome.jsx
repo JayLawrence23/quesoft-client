@@ -135,6 +135,7 @@ const CounterHome = () => {
     });
     socket.on('complete', (message) => {
       dispatch(ticketOnCounterStaff(valuescounter));
+    });
     socket.on('missed', (message) => {
       dispatch(ticketOnCounterStaff(valuescounter));
     });
