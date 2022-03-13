@@ -133,11 +133,17 @@ const CounterHome = () => {
     socket.on("call",() => {
       dispatch(ticketOnCounterStaff(valuescounter));
     });
+    socket.on("arrived",() => {
+      dispatch(countWaitingByService(valuescounter));
+    });
     socket.on('complete', (message) => {
       dispatch(ticketOnCounterStaff(valuescounter));
+      dispatch(countWaitingByService(valuescounter));
+      dispatch(countServedByService(valuescounter));
     });
     socket.on('missed', (message) => {
       dispatch(ticketOnCounterStaff(valuescounter));
+      dispatch(countMissedByService(valuescounter));
     });
   }, [socket])
   
