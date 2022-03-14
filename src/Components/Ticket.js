@@ -161,7 +161,7 @@ const Ticket = ( { ticketNo, serviceName, isQRShow, predictedWait, code, email})
                 <Typography component="div">
                     { predictedWait === 2 ? <Box fontWeight="fontWeightBold" fontSize={20}>You're near in line! Make sure you're inside at the vicinity.</Box> : null}
                     { predictedWait === 1 ? <Box fontWeight="fontWeightBold" fontSize={30}>You're Next! Please get ready.</Box> : null}
-                    { predictedWait === -1 ? <Box fontWeight="fontWeightBold" fontSize={28} className={classes.nowservingnumber}>It's your turn! Please proceed to the counter</Box> : null}
+                    { predictedWait === 0 ? <Box fontWeight="fontWeightBold" fontSize={28} className={classes.nowservingnumber}>It's your turn! Please proceed to the counter</Box> : null}
                     <Box fontSize={20}>Ticket Number:</Box>
                     <Box fontWeight="fontWeightBold" fontSize={40}>{ticketNo}</Box>
                     <Box fontSize={18}>{serviceName}</Box>
