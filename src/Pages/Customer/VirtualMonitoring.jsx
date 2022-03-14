@@ -105,7 +105,6 @@ const VirtualMonitoring = () => {
             }
         } else {
             if(validateEmail()){
-                // dispatch(monitorTicket(value));
                 emailNotif(values);
             }
         }
@@ -125,13 +124,19 @@ const VirtualMonitoring = () => {
         dispatch(getTransactions());
         dispatch(monitorTicket(value));
       });
-
+      socket.on('leave', (message) => {
+        dispatch(getTransactions());
+        dispatch(monitorTicket(value));
+      });
       socket.on('call', (message) => {
         console.log('call');
         dispatch(getTransactions());
         dispatch(monitorTicket(value));
       });
-
+      socket.on('notif', (message) => {
+        console.log('notif');
+        dispatch(monitorTicket(value));
+      });
       socket.off('call', (message) => {
         dispatch(getTransactions());
         dispatch(monitorTicket(value));
