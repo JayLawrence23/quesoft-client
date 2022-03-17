@@ -216,6 +216,7 @@ const VirtualMonitoring = () => {
                                 predictedWait={monitor.predWait}
                                 isQRShow={false}
                                 email={monitor.email && monitor.email}
+                                counterNumber={monitor.counterName && monitor.counterName}
                             />
                     
 
@@ -300,7 +301,7 @@ const VirtualMonitoring = () => {
                                 </Paper>
                             )}
                         </div> : 
-                        <Typography variant="h5">Notifications will sent to your { monitor && monitor.email !== null ? "email." : "phone."} </Typography>
+                        <Typography variant="h5">Notifications will sent to your <b>{ monitor && monitor.email !== null ? "email." : "phone."} </b> </Typography>
                             }
                         
                     </Paper>

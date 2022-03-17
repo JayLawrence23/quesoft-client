@@ -396,7 +396,7 @@ const CounterHome = () => {
           >
             {isMissedOpen ? 'Missed' : isMissedTicket ? 'Serve' : 'Next'}
           </Button>
-          {isMissedTicket ? null : (
+          { isMissedOpen ? null : isMissedTicket ? null : (
             <Button onClick={handleDone} color='primary'>
               Done
             </Button>
