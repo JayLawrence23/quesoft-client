@@ -7,6 +7,7 @@ import adminAuth from "./admin"
 import counter from './counter'
 import ticket from './ticket'
 import count from './count'
+import dashboard from './dashboard'
 
 export default combineReducers({
     services,
@@ -15,5 +16,6 @@ export default combineReducers({
     adminAuth,
     counter,
     ticket,
-    count
+    count,
+    dashboard
 });

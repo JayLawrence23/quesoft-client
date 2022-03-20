@@ -1,6 +1,7 @@
 import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Grid, Paper, Slide, Typography, AccordionDetails, AccordionSummary, Accordion, Chip } from '@material-ui/core';
 import { ToggleButton, ToggleButtonGroup } from '@material-ui/lab/';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import CheckCircleOutlinedIcon from '@material-ui/icons/CheckCircleOutlined';
 import React, { useEffect, useState, useContext } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
@@ -12,6 +13,7 @@ import Controls from '../../Components/Controls/Controls';
 import Layout from '../../Components/Layout';
 import Ticket from '../../Components/Ticket';
 import { Form, useForm } from '../../Components/useForm'
+import Faqs from '../../Components/Faqs';
 // import { socket } from '../../Socket';
 import useStyles from './styles/virtualmonitoring';
 import { SocketContext } from '../../Socket';
@@ -318,33 +320,23 @@ const VirtualMonitoring = () => {
                             <AccordionDetails>
                                 <Grid container spacing={2}>
                                     {monitor && monitor.tags.map((tag) => (
-                                        <Grid item xs={4} style={{ marginInline: 5}}>
-                                            <Chip label={`${tag} `}/>
+                                        <Grid item xs={6} style={{ marginInline: 5}}>
+                                            <Paper elevation={0} style={{ padding: 1 }}>
+                                                <Chip 
+                                                    variant="outlined" 
+                                                    color="primary" 
+                                                    label={`${tag} `}
+                                                    icon={<CheckCircleOutlinedIcon />}
+                                                    />
+                                            </Paper>
                                         </Grid>
                                     ))}
 
                                 </Grid>
                             </AccordionDetails>
                         </Accordion>
-                        <Accordion>
-                            <AccordionSummary
-                                expandIcon={<ExpandMoreIcon />}
-                                aria-controls="panel1a-content"
-                                id="panel1a-header"
-                                >
-                                <Typography className={classes.heading}>
-                                    Can I complete all of my transactions even if my ticket is only for a particular service?
-                                </Typography>
-                                </AccordionSummary>
-                                <AccordionDetails>
-                                <Typography>
-                                    Generally, you are only allowed to use the specified ticket for a particular service. 
-                                    It is important that you choose your start point and your service correctly before selecting a ticket. 
-                                    However, you can still get a new ticket for another service and be entertained, ensuring a smooth and successful transaction.
-                                </Typography>
-                            </AccordionDetails>
-                        </Accordion>
                         
+                        <Faqs />
                     </Paper>
                 </Grid>
              

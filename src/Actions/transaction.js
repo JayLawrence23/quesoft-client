@@ -9,7 +9,8 @@ import {
     FETCH_NUMBER_MISSED,
     FETCH_NUMBER_WAITING_ALL,
     FETCH_NUMBER_MISSED_ALL,
-    FETCH_NUMBER_SERVED_ALL
+    FETCH_NUMBER_SERVED_ALL,
+    FETCH_TOTAL_NUMBER_SERVED
 } from '../Constants/actionTypes'
 // Action Creators
 
@@ -173,9 +174,23 @@ export const countMissed = () => async (dispatch) => {
     try {
         const { data } = await api.countMissed();
 
-        console.log(data)
         dispatch({ type: FETCH_NUMBER_MISSED_ALL, payload: data });
     } catch (error) {
         console.log(error.message);
     }
 }
+
+// Dashboard
+
+export const countServedByAllService = () => async (dispatch) => {
+    
+    try {
+        const { data } = await api.countServedByAllService();
+
+        console.log(data);
+        dispatch({ type: FETCH_TOTAL_NUMBER_SERVED, payload: data });
+    } catch (error) {
+        console.log(error.message);
+    }
+}
+

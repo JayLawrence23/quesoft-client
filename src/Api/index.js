@@ -83,6 +83,9 @@ export const countMissedByService = (values) => API.post('/transaction/countmiss
 export const countWaiting = () => API.post('/transaction/countwaitall/');
 export const countServed = () => API.post('/transaction/countservedall/');
 export const countMissed = () => API.post('/transaction/countmissedall/');
+
+export const countServedByAllService = () => API.post('/transaction/countservedallservice/');
+
 export const showMissed = (values) => API.post('/transaction/showmissed/', values);
 export const searchMissedByService = (values) => API.post('/transaction/searchmissed/', values);
 export const serveMissedTicket = (values) => API.post('/transaction/servemissed/', values);

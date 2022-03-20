@@ -170,6 +170,7 @@ const CounterHome = () => {
 
   const handleDone = () => {
     dispatch(queuingComplete(valuesNext));
+    dispatch(ticketOnCounterStaff(valuescounter));
     handleClose();
   };
 
@@ -221,6 +222,7 @@ const CounterHome = () => {
 
   const handleServeMissed = () => {
     dispatch(serveMissedTicket(values));
+    handleClose();
   };
 
  
@@ -289,7 +291,7 @@ const CounterHome = () => {
                         <Grid container>
                           <Controls.Input
                             name='ticketNo'
-                            value={values.ticketNo.toUpperCase() || ''}
+                            value={values.ticketNo && values.ticketNo.toUpperCase() || ''}
                             label='Ticket'
                             onChange={handleInputChange}
                             fullWidth
@@ -394,11 +396,11 @@ const CounterHome = () => {
             }
             color='primary'
           >
-            {isMissedOpen ? 'Missed' : isMissedTicket ? 'Serve' : 'Next'}
+            {isMissedOpen ? 'Missed' : isMissedTicket ? 'Serve' : 'Finish & Call Next'}
           </Button>
           { isMissedOpen ? null : isMissedTicket ? null : (
             <Button onClick={handleDone} color='primary'>
-              Done
+              Finish
             </Button>
           )}
           <Button onClick={handleClose} color='primary'>

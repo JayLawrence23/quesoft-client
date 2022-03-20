@@ -119,6 +119,9 @@ const useStyles = makeStyles((theme) => ({
 
     papercontactbody: {
         margin: theme.spacing(2),
+    },
+    heading: {
+        fontWeight: 600,
     }
 }));
 

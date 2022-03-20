@@ -1,14 +1,34 @@
 import React from 'react'
 import { Bar } from 'react-chartjs-2';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getServices } from '../../Actions/services';
+import { countServedByAllService } from '../../Actions/transaction';
   
 const BarChart = () => {
+
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(getServices());
+        dispatch(countServedByAllService());
+    },[dispatch]);
+
+    const { services } = useSelector((state) => state.services);
+    const { served } = useSelector((state) => state.dashboard);
+
+    const serviceName = []; 
+
+    services.map((service) => serviceName.push(service.servName));
         
+    // console.log(served);
+
     const data = {
-        labels: ['Customer Service', 'Foreign Exchange', 'Withdrawal', 'Bills Payment'],
+        labels: served.service,
         datasets: [
         {
             label: 'Number of Customer',
-            data: [12, 19, 3, 5 ],
+            data: served.served,
             fill: false,
             backgroundColor: [
                 'rgba(6, 172, 182, 0.5)',
