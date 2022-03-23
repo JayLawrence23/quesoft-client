@@ -28,12 +28,12 @@ const Routes = () => {
     return ( 
         <Switch>
             {/* <Route path="/home" exact component={Home}></Route> */}
-            <Route exact path="/" component={Welcome}></Route>
+            <Route exact path="/" component={Code}></Route>
             <Route path="/virtualmonitoring/:value" exact component={VirtualMonitoring}></Route>
             <Route path="/livemonitoring" exact component={LiveMonitoring}></Route>
             <Route path="/home" exact component={Home}></Route>
             <Route path="/ticketing/:id/:code" exact component={Ticketing}></Route>
-            <Route path="/code" exact component={Code}></Route>
+            <Route path="/welcome" exact component={Welcome}></Route>
             <Route path="/transactions" exact component={Transactions}></Route>
             <Route path="/account" exact component={Account}></Route>
             <Route path="/dataprivacy" exact component={DataPrivacy}></Route>
