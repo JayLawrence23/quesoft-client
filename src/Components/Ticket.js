@@ -1,7 +1,7 @@
 import { Box, makeStyles, Paper, Typography } from '@material-ui/core';
 import { useEffect, useState ,useContext} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory, useParams } from 'react-router-dom';
+import { useHistory, useParams, Link } from 'react-router-dom';
 import { getService, getServiceByName } from '../Actions/services';
 import { countCounterByService } from '../Actions/counters';
 import logo from '../Assets/Images/logo-que.png';
@@ -181,7 +181,7 @@ const Ticket = ( { ticketNo, serviceName, isQRShow, predictedWait, code, email, 
                     <div className={classes.bite} style={{ left: -12, bottom: '19%'}}></div>
                     <Typography variant="caption" display="block" style={{ margin: '2rem 0'}} gutterBottom>
                         If you're not able to scan the QR code, <br/> Enter this code: <b> {code} </b> on <br /> 
-                        https://quesoft.vercel.app/code
+                        <Link to='/'> https://quesoft.vercel.app</Link> 
                     </Typography>
                 </>
                 : null }
