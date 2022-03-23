@@ -267,6 +267,7 @@ const CounterHome = () => {
                 </div>
               )}
             </Grid>
+            
             <Grid item xs={12} sm={4}>
               <Paper elevation={0} className={classes.rightpaper}>
                 {ticket ? null : (

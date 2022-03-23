@@ -20,6 +20,7 @@ import AdminAuth from '../Pages/Auth/AdminAuth'
 import Code from '../Pages/Customer/Code'
 import LiveMonitoring from '../Pages/Customer/LiveMonitoring'
 import Welcome from '../Pages/Welcome'
+import DataPrivacy from '../Pages/DataPrivacy'
 
 
 const Routes = () => {
@@ -35,6 +36,7 @@ const Routes = () => {
             <Route path="/code" exact component={Code}></Route>
             <Route path="/transactions" exact component={Transactions}></Route>
             <Route path="/account" exact component={Account}></Route>
+            <Route path="/dataprivacy" exact component={DataPrivacy}></Route>
             <Route path="/admin/auth" exact component={AdminAuth}></Route>
             <Route path="/admin/dashboard" exact component={Dashboard}></Route>
             <Route path="/admin/counterstaffaccount" exact component={CounterStaffAccount}></Route>

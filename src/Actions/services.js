@@ -72,6 +72,8 @@ export const deleteService = (id) => async (dispatch) => {
     }
 }
 
+// ========= ticket ================
+
 export const getTicket = (ticket) => async (dispatch) => {
     try {
         const { data } = await api.createTransaction(ticket);

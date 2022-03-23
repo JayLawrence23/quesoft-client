@@ -67,27 +67,6 @@ const ServiceGrid = () => {
                     </Grid>
                 ))}
 
-                {/* <Grid item xs={12} sm={6} md={3}>
-                    <ButtonBase component={Link} to={{ pathname: "/ticketing", state}}>
-                        <Paper elevation={0} className={classes.subservice}>
-                            <Typography variant="h4" component="h4" style={{color: grey[900], }} gutterBottom>
-                                Bills Payment<span className={classes.subdot}>.</span>
-                            </Typography>
-                            <Divider className={classes.divider} />
-                            <Typography variant="subtitle1" style={{color: grey[900], marginTop: 6}} gutterBottom>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
-                            </Typography>
-                            <Typography style={{ fontStyle: 'italic' }}>Waiting: 
-                                <Typography display="inline" 
-                                    variant="button" 
-                                    color="textPrimary" 
-                                    style={{ fontWeight: 'bold', }}> 12
-                                </Typography>
-                            </Typography>
-                        </Paper>
-                    </ButtonBase>
-                </Grid>
-               */}
             </Grid>
         </div>
      );

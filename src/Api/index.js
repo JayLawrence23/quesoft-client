@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-// const baseURL = 'http://localhost:5000';
-const baseURL = 'https://quesoft.herokuapp.com';
+const baseURL = 'http://localhost:5000';
+// const baseURL = 'https://quesoft.herokuapp.com';
 
 const API = axios.create({ baseURL});
 
@@ -65,7 +65,7 @@ export const fetchTransaction = (id) => API.get(`/transaction/${id}`);
 export const fetchTransactions = () => API.get('/transaction');
 export const createTransaction = (newTrans) => API.post(`/transaction/`, newTrans);
 export const deleteTransaction = (id) => API.delete(`/transaction/${id}`);
-export const getTicketData = (service) => API.get(`/transaction/ticket/`, service);
+export const getTicketData = (service) => API.post(`/transaction/ticket/`, service);
 export const leaveQueuing = (id) => API.patch(`/transaction/leave/${id}`);
 export const callCustomer = (values) => API.patch(`/transaction/call`, values);
 export const getCallingCustomers = () => API.patch(`/transaction/nowserve`);

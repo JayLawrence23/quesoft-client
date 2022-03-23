@@ -4,7 +4,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import CheckCircleOutlinedIcon from '@material-ui/icons/CheckCircleOutlined';
 import React, { useEffect, useState, useContext } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 
 import { monitorTicket } from '../../Actions/customerAuth';
 import { leaveQueuing } from '../../Actions/services';
@@ -41,8 +41,11 @@ const VirtualMonitoring = () => {
     const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
     const [openDialog, setOpenDialog] = useState(false);
     const [alignment, setAlignment] = useState('left');
+    const [agree, setAgree] = useState(false);
     const id = monitor && monitor._id;
     const { values, setValues, errors, setErrors, resetForm, handleInputChange } = useForm(initialFValues);
+    const textdata = "SEgr"
+    const linkToData = <Link to='/dataprivacy'>I have read and agree the Privacy Policy</Link>;
     // const servicename = "" || monitor.service;
 
     const handleAlignment = (event, newAlignment) => {
@@ -267,11 +270,18 @@ const VirtualMonitoring = () => {
                                                 fullWidth
                                             />
 
+                                            <Controls.Checkbox
+                                                name="datapriv"
+                                                label={linkToData}
+                                                onChange={() => setAgree(!agree)}
+                                            />
+
                                             <Controls.Button
                                                 text="Notify Me" 
                                                 type="submit"
                                                 className={classes.btn}
                                                 onClick={handleSubmit}
+                                                disabled={agree ? false : true }
                                             />
                                         </Grid>
                                     </Form>
@@ -292,11 +302,18 @@ const VirtualMonitoring = () => {
                                                 fullWidth
                                             />
 
+                                            <Controls.Checkbox
+                                                name="datapriv"
+                                                label={linkToData}
+                                                onChange={() => setAgree(!agree)}
+                                            />
+
                                             <Controls.Button
                                                 text="Notify Me" 
                                                 type="submit"
                                                 className={classes.btn}
                                                 onClick={handleSubmit}
+                                                disabled={agree ? false : true }
                                             />
                                         </Grid>
                                     </Form>
