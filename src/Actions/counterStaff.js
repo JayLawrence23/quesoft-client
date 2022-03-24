@@ -165,3 +165,15 @@ export const completeMissedTicket = (values) => async (dispatch) => {
         console.log(error.message);
     }
 }
+
+export const createNewTicket = (values, setIsValid) => async (dispatch) => {
+    try {
+        await api.createticketbycounter(values);
+
+        setIsValid(true);
+        
+    } catch (error) {
+        console.log(error.message);
+        
+    }
+}

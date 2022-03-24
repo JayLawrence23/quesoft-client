@@ -165,11 +165,14 @@ const Ticket = ( { ticketNo, serviceName, isQRShow, predictedWait, code, email, 
                     <Box fontSize={20}>Ticket Number:</Box>
                     <Box fontWeight="fontWeightBold" fontSize={40}>{ticketNo}</Box>
                     <Box fontSize={18}>{serviceName}</Box>
-                    { !isQR ? 
+                    { !isQR ?
+                    <>
+                    <Box fontWeight="fontWeightBold" fontSize={14} style={{ marginBlock: 12 }}>Please read FAQs below <br/> for more information. </Box> 
                     <Box fontSize={12} style={{ marginBlock: '1rem'}}>
                         Estimated Serving Time: &nbsp;
                         {ticketLen === 0 ? noChangeTime.toLocaleTimeString() + " - " + addTime.toLocaleTimeString() : lessTime.toLocaleTimeString() + " - " + addTime.toLocaleTimeString()}
-                    </Box>
+                    </Box> 
+                    </>
                     : null}
                     { isQR && <Box fontWeight="fontWeightBold" fontSize={14}>Scan this QR Code on your phone <br/> to monitor your queue virtually.</Box> }
                 </Typography>
@@ -186,7 +189,7 @@ const Ticket = ( { ticketNo, serviceName, isQRShow, predictedWait, code, email, 
                 </>
                 : null }
                 <Typography variant="caption" display="block" style={{ margin: '2rem 0'}} gutterBottom>
-                    The customer should be at the vicinity at least 3 prior to their number.
+                    The customer should be at the vicinity <b> at least 3 </b> prior to their number.
                     <br /> Thank you for waiting.
                 </Typography>
 

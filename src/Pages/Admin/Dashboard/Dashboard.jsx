@@ -6,6 +6,8 @@ import { Button, ButtonGroup, Typography, Box, makeStyles, Paper, Grid} from '@m
 import BarChart from "../../../Components/Charts/BarChart";
 import PieChart from "../../../Components/Charts/PieChart";
 import { countWaiting, countMissed, countServed } from '../../../Actions/transaction';
+import AveServBarChart from '../../../Components/Charts/AveServBarChart';
+import AveServPieChart from '../../../Components/Charts/AveServPieChart';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -118,12 +120,27 @@ const Dashboard = () => {
                 <Grid container spacing={2}>
                     <Grid item md={7} xs={12}>
                         <Paper elevation={0} className={classes.barchart}>
+                            <Typography> Number of Customer served by Service{' '}</Typography>
                             <BarChart/>
                         </Paper>
                     </Grid>
                     <Grid item md={5} xs={12}>
                         <Paper elevation={0} className={classes.piechart}>
                             <PieChart waiting={countWaitingAll} served={countServedAll} missed={countMissedAll} />
+                        </Paper>
+                    </Grid>
+                </Grid>
+
+                <Grid container spacing={2}>
+                    <Grid item md={7} xs={12}>
+                        <Paper elevation={0} className={classes.barchart}>
+                            <Typography> Average Serving Time in Minutes by Service {' '}</Typography>
+                            <AveServBarChart />
+                        </Paper>
+                    </Grid>
+                    <Grid item md={5} xs={12}>
+                        <Paper elevation={0} className={classes.piechart}>
+                            <AveServPieChart />
                         </Paper>
                     </Grid>
                 </Grid>

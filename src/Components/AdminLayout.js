@@ -6,7 +6,7 @@ import { alpha } from '@material-ui/core/styles';
 import ForumOutlinedIcon from '@material-ui/icons/ForumOutlined';
 import EventSeatOutlinedIcon from '@material-ui/icons/EventSeatOutlined';
 import PeopleAltOutlinedIcon from '@material-ui/icons/PeopleAltOutlined';
-import { AppsOutlined, Notifications, ReceiptOutlined } from '@material-ui/icons';
+import { AppsOutlined, ReceiptOutlined } from '@material-ui/icons';
 import SettingsOutlinedIcon from '@material-ui/icons/SettingsOutlined';
 import decode from 'jwt-decode';
 import React, { useEffect, useState } from 'react';
@@ -177,12 +177,7 @@ const AdminLayout = ({ children }) => {
                     <Typography className={classes.date}>
                         {/* Welcome, Admin! Today is the { format(new Date(), 'do MMMM Y')} */}
                     </Typography>
-
-                    <IconButton aria-label="show 11 new notifications" color="inherit">
-                        <Badge badgeContent={10} color="secondary">
-                            <Notifications color="primary"/>
-                        </Badge>
-                    </IconButton>
+                
                     <Button color="primary" onClick={handleClickOpen}>Logout</Button>
                     
                 </Toolbar>

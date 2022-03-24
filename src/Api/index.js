@@ -64,6 +64,7 @@ export const countCounterByService = (service) => API.post(`/counter/count`, ser
 export const fetchTransaction = (id) => API.get(`/transaction/${id}`);
 export const fetchTransactions = () => API.get('/transaction');
 export const createTransaction = (newTrans) => API.post(`/transaction/`, newTrans);
+export const createticketbycounter = (newTrans) => API.post(`/transaction/createticketbycounter`, newTrans);
 export const deleteTransaction = (id) => API.delete(`/transaction/${id}`);
 export const getTicketData = (service) => API.post(`/transaction/ticket/`, service);
 export const leaveQueuing = (id) => API.patch(`/transaction/leave/${id}`);
@@ -85,6 +86,7 @@ export const countServed = () => API.post('/transaction/countservedall/');
 export const countMissed = () => API.post('/transaction/countmissedall/');
 
 export const countServedByAllService = () => API.post('/transaction/countservedallservice/');
+export const averageServiceTime = () => API.post('/transaction/averageservicetime/');
 
 export const showMissed = (values) => API.post('/transaction/showmissed/', values);
 export const searchMissedByService = (values) => API.post('/transaction/searchmissed/', values);

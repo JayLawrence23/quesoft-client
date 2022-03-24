@@ -14,6 +14,10 @@ import {
   Tab,
   Tabs,
   Typography,
+  InputLabel, 
+  MenuItem, 
+  Select as MuiSelect,
+  FormControl
 } from '@material-ui/core';
 import CheckCircleOutlineOutlinedIcon from '@material-ui/icons/CheckCircleOutlineOutlined';
 import PropTypes from 'prop-types';
@@ -42,7 +46,9 @@ import {
   searchMissedByService,
   serveMissedTicket,
   completeMissedTicket,
+  createNewTicket,
 } from '../../Actions/counterStaff';
+import { getServices } from '../../Actions/services';
 import useStyles from './homestyle';
 import { SocketContext } from '../../Socket';
 
@@ -77,15 +83,19 @@ const CounterHome = () => {
   const { ticket, showmissed } = useSelector((state) => state.counterStaffAuth);
   const [openDialog, setOpenDialog] = useState(false);
   const { waiting } = useSelector((state) => state.ticket);
+  const { services } = useSelector((state) => state.services);
   const { countWaiting, countServed, countMissed } = useSelector(
     (state) => state.count
   );
+
   const [isMissedOpen, setIsMissedOpen] = useState(false);
   const [isMissedTicket, setIsMissedTicket] = useState(false);
+  const [isCreateTicket, setIsCreateTicket] = useState(false);
 
   const [isValid, setIsValid] = useState(false);
   const initialFValues = {
     ticketNo: '',
+    service: '',
   };
   const { values, setValues, errors, setErrors, resetForm, handleInputChange } =
     useForm(initialFValues);
@@ -103,6 +113,7 @@ const CounterHome = () => {
   };
 
   let valuesNext = {};
+  let valuesNewTicket = {};
 
   if (ticket) {
     valuesNext = {
@@ -110,6 +121,16 @@ const CounterHome = () => {
       counterName: ticket.counterName,
       service: ticket.service,
       ticketNo: ticket.ticketNo,
+    };
+
+    valuesNewTicket= {
+      business: ticket.business,
+      id: ticket._id,
+      code: ticket.code,
+      service: values.service,
+      email: ticket.email,
+      contact: ticket.contact,
+      monitor: true,
     };
   }
 
@@ -119,6 +140,7 @@ const CounterHome = () => {
     dispatch(countMissedByService(valuescounter));
     dispatch(countServedByService(valuescounter));
     dispatch(showMissed(valuescounter));
+    dispatch(getServices());
     if (ticket) {
       setIsServing(true);
     }
@@ -135,6 +157,7 @@ const CounterHome = () => {
     });
     socket.on("arrived", (message) => {
       dispatch(countWaitingByService(valuescounter));
+      dispatch(getServices());
     });
     socket.on('complete', (message) => {
       dispatch(ticketOnCounterStaff(valuescounter));
@@ -162,6 +185,7 @@ const CounterHome = () => {
     setOpenDialog(false);
     setIsMissedOpen(false);
     setIsMissedTicket(false);
+    setIsCreateTicket(false);
   };
 
   const handleChange = (event, newValue) => {
@@ -220,6 +244,41 @@ const CounterHome = () => {
     }
   };
 
+  const validateNewTicket = () => {
+    let temp = {};
+    temp.service = values.service ? '' : 'This field is required.';
+
+    setErrors({
+      ...temp,
+    });
+
+    return Object.values(temp).every((x) => x === '');
+  };
+
+  const handleClickOpenCreate = (e) => {
+    e.preventDefault();
+    
+    if (validateNewTicket()) {
+      setOpenDialog(true);
+      setIsCreateTicket(true);
+    }
+    
+  };
+
+  const handleCreateTicket = () => {
+
+    if (validateNewTicket()) {
+      dispatch(
+        createNewTicket(
+          valuesNewTicket,
+          setIsValid
+        )
+      );
+      setOpenDialog(false);
+      setIsCreateTicket(false);
+    }
+  };
+
   const handleServeMissed = () => {
     dispatch(serveMissedTicket(values));
     handleClose();
@@ -262,7 +321,7 @@ const CounterHome = () => {
                     color='primary'
                     onClick={() => handleCallCustomer(valuescounter)}
                   >
-                    Call Customer
+                    Call {ticket && ticket.business === "School" ? "Student" : "Customer "}
                   </Button>
                 </div>
               )}
@@ -270,7 +329,56 @@ const CounterHome = () => {
             
             <Grid item xs={12} sm={4}>
               <Paper elevation={0} className={classes.rightpaper}>
-                {ticket ? null : (
+                {ticket ? (
+                   <div>
+                   <Typography variant='subtitle1' component={'span'}>
+                     Create new ticket for  {ticket.ticketNo}
+                   </Typography>
+
+                   <Paper elevation={0} style={{ maxWidth: 400 }}>
+                     {isValid && (
+                       <AlertMessage
+                         severity='success'
+                         message='Ticket created successfully.'
+                       />
+                     )}
+
+                     <Typography component={'span'} variant='h6'>
+                       Select Service: {' '}
+                     </Typography>
+
+                     <Form>
+                       <Grid container>
+                          <Grid item xs={12}>
+                            <FormControl variant="outlined" className={classes.formControl} fullWidth>
+                                <InputLabel htmlFor="outlined-age-native-simple" style={{ background: 'white', paddingInline: 5}}>Service</InputLabel>
+                                <MuiSelect
+                                    name="service"
+                                    value={values.service}
+                                    onChange={handleInputChange}
+                                    error={!!errors.service}>
+                                        <MenuItem value="">None</MenuItem>
+                                        {
+                                            services.map(
+                                                item => (<MenuItem key={item._id} value={item.servName} > {item.servName} </MenuItem>)
+                                            )
+                                        }
+                                    </MuiSelect>
+                            </FormControl>
+                          </Grid>
+
+                         <Controls.Button
+                           text='Create'
+                           type='submit'
+                           className={classes.btn}
+                           onClick={handleClickOpenCreate}
+                         />
+                       </Grid>
+                     </Form>
+                   </Paper>
+                 </div>
+                ) : 
+                (
                   <div>
                     <Typography variant='subtitle1' component={'span'}>
                       Missed Queue? Type here{' '}
@@ -310,6 +418,7 @@ const CounterHome = () => {
                     </Paper>
                   </div>
                 )}
+                
                 <div className={classes.waiting}>
                   <Typography variant='subtitle1' component={'span'}>
                     Waiting:{' '}
@@ -380,10 +489,12 @@ const CounterHome = () => {
         <DialogContent>
           <DialogContentText id='alert-dialog-slide-description'>
             {isMissedOpen
-              ? 'Once you click missed, the customer will miss the queue and will call next customer. Are you sure?'
+              ? `Once you click missed, the ${ticket && ticket.business === "School" ? "student" : "customer "} will miss the queue and will call next customer. Are you sure?`
               : isMissedTicket
-              ? "Ticket found. Once you click serve, you'll be serving the customer who missed their queue."
-              : 'Once you click next, transaction is done and the next customer will call to serve. Once you click done, the transaction is done.'}
+              ? `Ticket found. Once you click serve, you'll be serving the ${ticket && ticket.business === "School" ? "student" : "customer "} who missed their queue.`
+              : isCreateTicket
+              ? "Sure ka na?"
+              : `Once you click next, transaction is done and the next ${ticket && ticket.business === "School" ? "student" : "customer "} will call to serve. Once you click done, the transaction is done.`}
           </DialogContentText>
         </DialogContent>
         <DialogActions>
@@ -393,13 +504,16 @@ const CounterHome = () => {
                 ? handleMissed
                 : isMissedTicket
                 ? handleServeMissed
+                : isCreateTicket
+                ? handleCreateTicket
                 : handleNext
+                
             }
             color='primary'
           >
-            {isMissedOpen ? 'Missed' : isMissedTicket ? 'Serve' : 'Finish & Call Next'}
+            {isMissedOpen ? 'Missed' : isMissedTicket ? 'Serve' : isCreateTicket ? "Create" : 'Finish & Call Next'}
           </Button>
-          { isMissedOpen ? null : isMissedTicket ? null : (
+          { isMissedOpen ? null : isMissedTicket ? null : isCreateTicket ? null : (
             <Button onClick={handleDone} color='primary'>
               Finish
             </Button>

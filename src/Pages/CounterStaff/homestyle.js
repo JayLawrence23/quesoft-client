@@ -47,6 +47,11 @@ const useStyles = makeStyles((theme) => {
         rightpaper: {
             borderRadius: 16,
             padding: theme.spacing(2),
+        },
+        formControl: {
+            '& .MuiInputBase-root': {
+                borderRadius: 16,
+            }
         }
     }
     

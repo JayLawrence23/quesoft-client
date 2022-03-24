@@ -1,32 +1,30 @@
 import React from 'react'
-import { Bar } from 'react-chartjs-2';
+import { Doughnut } from 'react-chartjs-2';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getServices } from '../../Actions/services';
-import { countServedByAllService } from '../../Actions/transaction';
-  
-const BarChart = () => {
+import { averageServiceTime } from '../../Actions/transaction';
 
+const AveServPieChart = ( { missed, waiting, served}) => {
+        
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(countServedByAllService());
+        dispatch(averageServiceTime());
     },[dispatch]);
 
-    const { served } = useSelector((state) => state.dashboard);
+    const { avgServTime } = useSelector((state) => state.dashboard);
    
-    const allServed = Array.isArray(served) ? served.reduce((obj, item) => (obj[item._id] = item.count, obj) ,{}) : 0;
+    const allServed = Array.isArray(avgServTime) ? avgServTime.reduce((obj, item) => (obj[item._id] = item.ave, obj) ,{}) : 0;
     
     const serviceNames = Object.keys(allServed);
-    const servedCounts = Object.values(allServed);
+    const servedAve = Object.values(allServed);
 
     const data = {
-        
         labels: serviceNames,
         datasets: [
         {
             label: 'Number of Customer',
-            data: servedCounts,
+            data: servedAve,
             fill: false,
             backgroundColor: [
                 'rgba(6, 172, 182, 0.5)',
@@ -58,19 +56,11 @@ const BarChart = () => {
     };
   
     const options = {
-        scales: {
-        yAxes: [
-            {
-            ticks: {
-                beginAtZero: true,
-            },
-            },
-        ],
-        },
+       
     };
     return (
         <div>
-            <Bar
+            <Doughnut
                 data={data}
                 options={options}
                 height={300}
@@ -80,4 +70,4 @@ const BarChart = () => {
     )
 }
 
-export default BarChart
+export default AveServPieChart

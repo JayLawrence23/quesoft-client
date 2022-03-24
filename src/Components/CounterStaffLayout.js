@@ -4,7 +4,7 @@ import { AppBar, Avatar, Badge, Button, Drawer,
     DialogContent, DialogContentText, DialogTitle } from '@material-ui/core';
 import { grey, pink } from '@material-ui/core/colors';
 import { alpha } from '@material-ui/core/styles';
-import { AppsOutlined, DesktopWindowsOutlined, Notifications, ReceiptOutlined } from '@material-ui/icons';
+import { AppsOutlined, DesktopWindowsOutlined, ReceiptOutlined } from '@material-ui/icons';
 import { format } from 'date-fns';
 import decode from 'jwt-decode';
 import React, { useEffect, useState } from 'react';
@@ -161,11 +161,6 @@ const CounterStaffLayout = ({ children }) => {
                         Welcome, {user.result ? user.result.fname : user.fname }! Today is the { format(new Date(), 'do MMMM Y')}
                     </Typography>
 
-                    <IconButton aria-label="show 11 new notifications" color="primary">
-                        <Badge badgeContent={10} color="secondary">
-                            <Notifications />
-                        </Badge>
-                    </IconButton>
                     <Button color="primary" onClick={handleClickOpen}>Logout</Button>
                     
                 </Toolbar>
