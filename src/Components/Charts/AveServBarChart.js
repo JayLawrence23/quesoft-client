@@ -24,7 +24,7 @@ const AveServBarChart = () => {
         labels: serviceNames,
         datasets: [
         {
-            label: 'Number of Customer',
+            label: 'Number of Minutes',
             data: servedAve,
             fill: false,
             backgroundColor: [

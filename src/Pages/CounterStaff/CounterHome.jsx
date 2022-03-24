@@ -493,7 +493,7 @@ const CounterHome = () => {
               : isMissedTicket
               ? `Ticket found. Once you click serve, you'll be serving the ${ticket && ticket.business === "School" ? "student" : "customer "} who missed their queue.`
               : isCreateTicket
-              ? "Sure ka na?"
+              ? `New ticket will be create for the currrent ${ticket && ticket.business === "School" ? "student" : "customer "} , are you sure?`
               : `Once you click next, transaction is done and the next ${ticket && ticket.business === "School" ? "student" : "customer "} will call to serve. Once you click done, the transaction is done.`}
           </DialogContentText>
         </DialogContent>
