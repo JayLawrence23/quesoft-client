@@ -5,7 +5,7 @@ import { Search } from "@material-ui/icons";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import ReceiptOutlinedIcon from '@material-ui/icons/ReceiptOutlined';
-import { getTransactions } from "../../Actions/transaction";
+import { getTransactionsByCounter } from '../../Actions/transaction';
 import { socket } from '../../Socket';
 //Components
 import CounterStaffLayout from "../../Components/CounterStaffLayout";
@@ -73,7 +73,7 @@ const CounterTransactions = () => {
 
     //Start here
     useEffect(() => {
-        dispatch(getTransactions());
+        dispatch(getTransactionsByCounter(values));
         // eslint-disable-next-line
     }, [dispatch]);
 

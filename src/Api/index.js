@@ -63,6 +63,7 @@ export const countCounterByService = (service) => API.post(`/counter/count`, ser
 
 export const fetchTransaction = (id) => API.get(`/transaction/${id}`);
 export const fetchTransactions = () => API.get('/transaction');
+export const fetchTransactionsByCounter = (values) => API.post('/transaction/getransactionbycounter', values);
 export const createTransaction = (newTrans) => API.post(`/transaction/`, newTrans);
 export const createticketbycounter = (newTrans) => API.post(`/transaction/createticketbycounter`, newTrans);
 export const deleteTransaction = (id) => API.delete(`/transaction/${id}`);

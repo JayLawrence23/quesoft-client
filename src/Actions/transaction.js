@@ -25,6 +25,16 @@ export const getTransactions = () => async (dispatch) => {
     }
 }
 
+export const getTransactionsByCounter = (values) => async (dispatch) => {
+    try {
+        const { data } = await api.fetchTransactionsByCounter(values);
+
+        dispatch({type: FETCH_TRANSACTION, payload: data});
+    } catch (error) {
+        console.log(error.message);
+    }
+}
+
 export const leaveQueuesWaiting = (id) => async (dispatch) => {
     try {
         dispatch({ type: LEAVE_QUEUING_WAITING, payload: id });
