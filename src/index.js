@@ -14,14 +14,13 @@ import { SocketProvider } from './Socket';
 
 const store = createStore(reducers, compose(applyMiddleware(thunk)))
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-
-root.render(
+ReactDOM.render(
     <Provider store={store}>
         <SocketProvider>
         <App />
         </SocketProvider>
-    </Provider>
+    </Provider>, 
+    document.getElementById('root')
 );
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
