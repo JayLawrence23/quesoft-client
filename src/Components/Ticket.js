@@ -184,7 +184,7 @@ const Ticket = ( { ticketNo, serviceName, isQRShow, predictedWait, code, email, 
                     <div className={classes.bite} style={{ left: -12, bottom: '19%'}}></div>
                     <Typography variant="caption" display="block" style={{ margin: '2rem 0'}} gutterBottom>
                         If you're not able to scan the QR code, <br/> Enter this code: <b> {code} </b> on <br /> 
-                        <Link to='/'> https://quesoft.vercel.app</Link> 
+                        <Link to='/'>https://quesoft.vercel.app</Link> 
                     </Typography>
                 </>
                 : null }

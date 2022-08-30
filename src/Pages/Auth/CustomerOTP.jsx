@@ -1,4 +1,4 @@
-import { Grid, Typography, makeStyles, Container, Paper, Button, Divider } from '@material-ui/core'
+import { Grid, Typography, makeStyles, Container, Paper, Button } from '@material-ui/core'
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
@@ -34,11 +34,10 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const initialFValues = {
-    dname: '',
-    code: '',
+    otp: '',
 }
 
-const  Code = () => {
+const CustomerOTP = () => {
 
     const classes = useStyles();
     const history = useHistory();
@@ -48,8 +47,7 @@ const  Code = () => {
 
     const validate = () => {
         let temp = {}
-        temp.code = values.code ? "" : "This field is required."
-        temp.dname = values.dname ? "" : "This field is required."
+        temp.otp = values.otp ? "" : "This field is required."
 
         setErrors({
             ...temp
@@ -64,6 +62,11 @@ const  Code = () => {
         if(validate()){
             dispatch(monitorTicketByCode(values, history, setIsValid));
         }
+        history.push("/otp");
+    }
+
+    const handleSignIn = () => {
+        history.push("/signup");
     }
 
 
@@ -76,55 +79,26 @@ const  Code = () => {
                     <AlertMessage severity="error" message="Invalid Code."/>)
                 }
                         
-                    <Typography component="h6" variant="h6">Enter the code on the ticket:</Typography>
+                    <Typography component="h6" variant="h6">OTP</Typography>
 
                     <Form>
                         <Grid container>
                             <Controls.Input
-                                name="dname"
-                                value={ values.dname || ""}
-                                label="Display Name"
+                                name="otp"
+                                value={ values.otp || ""}
+                                label="Enter code"
                                 onChange={ handleInputChange}
-                                error={errors.dname}
-                                fullWidth
-                            />
-                            <Controls.Input
-                                name="code"
-                                value={ values.code || ""}
-                                label="Code"
-                                onChange={ handleInputChange}
-                                error={errors.code}
+                                error={errors.otp}
                                 fullWidth
                             />
 
                             <Controls.Button
-                                text="Monitor" 
+                                text="Next" 
                                 type="submit"
                                 className={classes.btn}
                                 onClick={handleSubmit}
                             />
-                           
-                            <Grid item xs={12}>
-                                <Divider variant="middle" style={{ marginBlock: 16 }}/>
-                                
-                            </Grid>
-
-                            <Controls.Button
-                                text="Create an account to track your visits. Sign Up." 
-                                variant="outlined"
-                                className={classes.btn}
-                                //onClick={handleSubmit}
-                            />
-
-
-                           <Controls.Button
-                                text="Already have an account? Sign In." 
-                                //type="submit"
-                                className={classes.btn}
-                                //onClick={handleSubmit}
-                            />
-                          
-
+                            
                         </Grid>
                     </Form>
                 </Paper>
@@ -133,4 +107,4 @@ const  Code = () => {
     )
 }
 
-export default Code
+export default CustomerOTP;

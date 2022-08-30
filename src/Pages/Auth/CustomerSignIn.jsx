@@ -1,4 +1,4 @@
-import { Grid, Typography, makeStyles, Container, Paper, Button, Divider } from '@material-ui/core'
+import { Grid, Typography, makeStyles, Container, Paper, Button } from '@material-ui/core'
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
@@ -34,11 +34,10 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const initialFValues = {
-    dname: '',
-    code: '',
+    mobile: '',
 }
 
-const  Code = () => {
+const CustomerSignIn = () => {
 
     const classes = useStyles();
     const history = useHistory();
@@ -48,8 +47,7 @@ const  Code = () => {
 
     const validate = () => {
         let temp = {}
-        temp.code = values.code ? "" : "This field is required."
-        temp.dname = values.dname ? "" : "This field is required."
+        temp.mobile = values.mobile ? "" : "This field is required."
 
         setErrors({
             ...temp
@@ -62,8 +60,13 @@ const  Code = () => {
         e.preventDefault(); //To not refresh the form after clickng submit
        
         if(validate()){
-            dispatch(monitorTicketByCode(values, history, setIsValid));
+            // dispatch(monitorTicketByCode(values, history, setIsValid));
+            history.push("/otp");
         }
+    }
+
+    const handleSignIn = () => {
+        history.push("/signup");
     }
 
 
@@ -76,55 +79,31 @@ const  Code = () => {
                     <AlertMessage severity="error" message="Invalid Code."/>)
                 }
                         
-                    <Typography component="h6" variant="h6">Enter the code on the ticket:</Typography>
+                    <Typography component="h6" variant="h6">Sign In</Typography>
 
                     <Form>
                         <Grid container>
                             <Controls.Input
-                                name="dname"
-                                value={ values.dname || ""}
-                                label="Display Name"
+                                name="mobile"
+                                value={ values.mobile || ""}
+                                label="Mobile Number"
                                 onChange={ handleInputChange}
-                                error={errors.dname}
-                                fullWidth
-                            />
-                            <Controls.Input
-                                name="code"
-                                value={ values.code || ""}
-                                label="Code"
-                                onChange={ handleInputChange}
-                                error={errors.code}
+                                error={errors.mobile}
                                 fullWidth
                             />
 
                             <Controls.Button
-                                text="Monitor" 
+                                text="Sign In" 
                                 type="submit"
                                 className={classes.btn}
                                 onClick={handleSubmit}
                             />
-                           
-                            <Grid item xs={12}>
-                                <Divider variant="middle" style={{ marginBlock: 16 }}/>
-                                
+
+                            <Grid item xs={12} sm={12}>
+                                <Button onClick={handleSignIn}>No account yet? Sign Up Now</Button>
                             </Grid>
-
-                            <Controls.Button
-                                text="Create an account to track your visits. Sign Up." 
-                                variant="outlined"
-                                className={classes.btn}
-                                //onClick={handleSubmit}
-                            />
-
-
-                           <Controls.Button
-                                text="Already have an account? Sign In." 
-                                //type="submit"
-                                className={classes.btn}
-                                //onClick={handleSubmit}
-                            />
-                          
-
+                           
+                            
                         </Grid>
                     </Form>
                 </Paper>
@@ -133,4 +112,4 @@ const  Code = () => {
     )
 }
 
-export default Code
+export default CustomerSignIn;

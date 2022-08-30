@@ -21,6 +21,9 @@ import Code from '../Pages/Customer/Code'
 import LiveMonitoring from '../Pages/Customer/LiveMonitoring'
 import Welcome from '../Pages/Welcome'
 import DataPrivacy from '../Pages/DataPrivacy'
+import CustomerSignUp from '../Pages/Auth/CustomerSignUp'
+import CustomerSignIn from '../Pages/Auth/CustomerSignIn'
+import CustomerOTP from '../Pages/Auth/CustomerOTP'
 
 
 const Routes = () => {
@@ -29,6 +32,9 @@ const Routes = () => {
         <Switch>
             {/* <Route path="/home" exact component={Home}></Route> */}
             <Route exact path="/" component={Code}></Route>
+            <Route path="/signup" component={CustomerSignUp}></Route>
+            <Route path="/signin" component={CustomerSignIn}></Route>
+            <Route path="/otp" component={CustomerOTP}></Route>
             <Route path="/virtualmonitoring/:value" exact component={VirtualMonitoring}></Route>
             <Route path="/livemonitoring" exact component={LiveMonitoring}></Route>
             <Route path="/home" exact component={Home}></Route>

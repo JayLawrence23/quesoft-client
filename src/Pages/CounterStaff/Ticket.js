@@ -129,7 +129,7 @@ const Ticket = ( { handleClickOpenDone, ticket, calling, handleClickOpenMissed }
                     <Box fontWeight="fontWeightBold" fontSize={40}>{ticket.ticketNo}</Box>
                    
                     <Box fontSize={18}></Box>
-                    <Box fontSize={12} style={{ marginBlock: '1rem'}}>Virtual Queuing</Box>
+                    <Box fontSize={18} style={{ marginBlock: '1rem'}}>{ticket.dname ? ticket.dname : null }</Box>
                 </Typography>
                  : null }
                 <div>

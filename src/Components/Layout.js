@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) => {
             width: '100%'
         },
         root: {
-            display: 'flex'
+            display: 'flex',
         },
         active: {
             background: '#f4f4f4',

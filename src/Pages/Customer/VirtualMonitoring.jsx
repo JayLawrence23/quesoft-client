@@ -164,6 +164,29 @@ const VirtualMonitoring = () => {
                             <Grid item xs={12}>
                                 <Typography
                                     variant="h4"
+                                    color="main"
+                                    component="overline"
+                                    className={classes.welcometitle}
+                                    gutterBottom
+                                    noWrap
+                                >
+                                Hello,&nbsp;
+                                </Typography>
+                                <Typography
+                                    variant="h4"
+                                    color="main"
+                                    component="overline"
+                                    className={classes.displayname}
+                                    gutterBottom
+                                    noWrap
+                                >
+                                { monitor.dname }!
+                                </Typography>
+                               
+                            </Grid>
+                            <Grid item xs={12}>
+                                <Typography
+                                    variant="h4"
                                     color="secondary"
                                     component="h4"
                                     className={classes.servingtitle}

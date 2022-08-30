@@ -18,7 +18,8 @@ const useStyles = makeStyles((theme) => ({
     },
     bodycontainer: {
         maxWidth: 480,
-        marginInline: 'auto'
+        marginInline: 'auto',
+        marginBlock: '3.5rem'
     },
     backbutton: {
         border: '1px ' + theme.palette.primary[500] + ' solid',
@@ -46,6 +47,34 @@ const useStyles = makeStyles((theme) => ({
         },
         [theme.breakpoints.down('xs')]: {
             fontSize: '5vw',
+        },
+    },
+    welcometitle: {
+        fontWeight: 'bold',
+        [theme.breakpoints.down('sm')]: {
+            fontSize: 36,
+        },
+        [theme.breakpoints.down('xs')]: {
+            fontSize: '7vw',
+        },
+    },
+    displayname: {
+        position: 'relative',
+        fontWeight: 'bold',
+        [theme.breakpoints.down('sm')]: {
+            fontSize: 36,
+        },
+        [theme.breakpoints.down('xs')]: {
+            fontSize: '7vw',
+        },
+        '&::before': {
+            content: "' '",
+            position: 'absolute',
+            height: 5,
+            width: 30,
+            background: theme.palette.primary[400],
+            bottom: 1,
+            left: 0,
         },
     },
     servingcontent: {
