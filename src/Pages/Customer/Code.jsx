@@ -66,6 +66,14 @@ const  Code = () => {
         }
     }
 
+    const handleSignUp = () => {
+        history.push("/signup");
+    }
+
+    const handleSignIn = () => {
+        history.push("/signin");
+    }
+
 
     return (
         <Layout>
@@ -113,7 +121,7 @@ const  Code = () => {
                                 text="Create an account to track your visits. Sign Up." 
                                 variant="outlined"
                                 className={classes.btn}
-                                //onClick={handleSubmit}
+                                onClick={handleSignUp}
                             />
 
 
@@ -121,7 +129,7 @@ const  Code = () => {
                                 text="Already have an account? Sign In." 
                                 //type="submit"
                                 className={classes.btn}
-                                //onClick={handleSubmit}
+                                onClick={handleSignIn}
                             />
                           
 
