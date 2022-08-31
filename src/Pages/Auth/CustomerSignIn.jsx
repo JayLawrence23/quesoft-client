@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux';
 import Controls from '../../Components/Controls/Controls'
 import Layout from '../../Components/Layout'
 import { Form, useForm } from '../../Components/useForm'
-import { monitorTicketByCode } from '../../Actions/customerAuth'
+import { signin } from '../../Actions/customerAuth'
 import AlertMessage from '../../Components/AlertMessage'
 
 
@@ -28,7 +28,8 @@ const useStyles = makeStyles((theme) => ({
         boxShadow: '-1px 3px 12px 0px rgba(207,184,146,0.25)',
         display: 'flex',
         flexDirection: 'column',
-        justifyContent: 'space-around'
+        justifyContent: 'space-around',
+        maxWidth: 560,
     }
 
 }));
@@ -60,8 +61,7 @@ const CustomerSignIn = () => {
         e.preventDefault(); //To not refresh the form after clickng submit
        
         if(validate()){
-            // dispatch(monitorTicketByCode(values, history, setIsValid));
-            history.push("/otp");
+            dispatch(signin(values, history, setIsValid));
         }
     }
 
@@ -69,6 +69,9 @@ const CustomerSignIn = () => {
         history.push("/signup");
     }
 
+    const handleForgot = () => {
+        history.push("/forgotpass");
+    }
 
     return (
         <Layout>
@@ -76,7 +79,7 @@ const CustomerSignIn = () => {
                 <Paper elevation={0} className={classes.card}> 
 
                 { isValid && (
-                    <AlertMessage severity="error" message="Invalid Code."/>)
+                    <AlertMessage severity="error" message="Account doesn't exist."/>)
                 }
                         
                     <Typography component="h6" variant="h6">Sign In</Typography>
@@ -86,7 +89,7 @@ const CustomerSignIn = () => {
                             <Controls.Input
                                 name="mobile"
                                 value={ values.mobile || ""}
-                                label="Mobile Number"
+                                label="Mobile Number (eg. 0915)"
                                 onChange={ handleInputChange}
                                 error={errors.mobile}
                                 fullWidth
@@ -99,6 +102,9 @@ const CustomerSignIn = () => {
                                 onClick={handleSubmit}
                             />
 
+                            <Grid item xs={12} style={{ marginBlock: 10 }}>
+                                <Button onClick={handleForgot} color="primary">Forgot Password?</Button>
+                            </Grid>
                             <Grid item xs={12} sm={12}>
                                 <Button onClick={handleSignIn}>No account yet? Sign Up Now</Button>
                             </Grid>

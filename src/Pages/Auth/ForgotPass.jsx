@@ -34,10 +34,10 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const initialFValues = {
-    otp: '',
+    mobile: '',
 }
 
-const CustomerOTP = () => {
+const ForgotPass = () => {
 
     const classes = useStyles();
     const history = useHistory();
@@ -66,7 +66,7 @@ const CustomerOTP = () => {
     }
 
     const handleSignIn = () => {
-        history.push("/signup");
+        history.push("/signin");
     }
 
 
@@ -79,35 +79,34 @@ const CustomerOTP = () => {
                     <AlertMessage severity="error" message="Invalid Code."/>)
                 }
                         
-                    <Typography component="h6" variant="h6" gutterBottom>One Time Password</Typography>
+                    <Typography component="h6" variant="h6" gutterBottom>Forgot Password</Typography>
 
                     <Typography component="p" variant="body1">To verify your account, please complete the following verification.</Typography>
-                    <Typography component="p" variant="body1">Check your SMS.</Typography>
+                    <Typography component="p" variant="body1">Enter your phone number to reset your account. </Typography>
                     
                     <Form>
                         <Grid container>
                             <Controls.Input
                                 name="otp"
-                                value={ values.otp || ""}
-                                label="Enter code"
+                                value={ values.mobile || ""}
+                                label="Mobile Number (eg. 0915)"
                                 onChange={ handleInputChange}
-                                error={errors.otp}
+                                error={errors.mobile}
                                 fullWidth
                             />
 
                             <Controls.Button
-                                text="Next" 
+                                text="Send" 
                                 type="submit"
                                 className={classes.btn}
                                 onClick={handleSubmit}
                             />
-
+                            
                             <Controls.Button
                                 variant="outlined"
-                                text="Resend Code" 
-                                type="submit"
+                                text="Back to Sign In" 
                                 className={classes.btn}
-                                // onClick={handleSubmit}
+                                onClick={handleSignIn}
                             />
                             
                         </Grid>
@@ -118,4 +117,4 @@ const CustomerOTP = () => {
     )
 }
 
-export default CustomerOTP;
+export default ForgotPass;

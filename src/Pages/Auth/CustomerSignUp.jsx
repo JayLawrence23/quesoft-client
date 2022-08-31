@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux';
 import Controls from '../../Components/Controls/Controls'
 import Layout from '../../Components/Layout'
 import { Form, useForm } from '../../Components/useForm'
-import { monitorTicketByCode } from '../../Actions/customerAuth'
+import { signup } from '../../Actions/customerAuth'
 import AlertMessage from '../../Components/AlertMessage'
 
 
@@ -64,9 +64,8 @@ const CustomerSignUp = () => {
         e.preventDefault(); //To not refresh the form after clickng submit
        
         if(validate()){
-            dispatch(monitorTicketByCode(values, history, setIsValid));
+            dispatch(signup(values, history, setIsValid));
         }
-        history.push("/otp");
     }
 
     const handleSignIn = () => {
@@ -80,7 +79,7 @@ const CustomerSignUp = () => {
                 <Paper elevation={0} className={classes.card}> 
 
                 { isValid && (
-                    <AlertMessage severity="error" message="Invalid Code."/>)
+                    <AlertMessage severity="error" message="The mobile number is already exist."/>)
                 }
                         
                     <Typography component="h6" variant="h6">Sign Up</Typography>
@@ -106,7 +105,7 @@ const CustomerSignUp = () => {
                             <Controls.Input
                                 name="mobile"
                                 value={ values.mobile || ""}
-                                label="Mobile Number"
+                                label="Mobile Number (0945 eg.)"
                                 onChange={ handleInputChange}
                                 error={errors.mobile}
                                 fullWidth

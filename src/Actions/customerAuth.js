@@ -8,7 +8,7 @@ export const signin = (values, history, setIsValid) => async (dispatch) => {
         const { data } = await api.signIn(values);
         
         dispatch({ type: AUTH, data});
-        history.push('/home');
+        history.push('/otp');
         // dispatch({type: FETCH_ALL, payload: data});
     } catch (error) {
         console.log(error.message);
@@ -51,7 +51,7 @@ export const signup = (values, history, setIsValid) => async (dispatch) => {
         
         dispatch({ type: AUTH, data});
 
-        history.push('/home');
+        history.push('/otp');
         // dispatch({type: FETCH_ALL, payload: data});
     } catch (error) {
         console.log(error.message);

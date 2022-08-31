@@ -24,6 +24,7 @@ import DataPrivacy from '../Pages/DataPrivacy'
 import CustomerSignUp from '../Pages/Auth/CustomerSignUp'
 import CustomerSignIn from '../Pages/Auth/CustomerSignIn'
 import CustomerOTP from '../Pages/Auth/CustomerOTP'
+import ForgotPass from '../Pages/Auth/ForgotPass'
 
 
 const Routes = () => {
@@ -35,6 +36,7 @@ const Routes = () => {
             <Route path="/signup" component={CustomerSignUp}></Route>
             <Route path="/signin" component={CustomerSignIn}></Route>
             <Route path="/otp" component={CustomerOTP}></Route>
+            <Route path="/forgotpass" component={ForgotPass}></Route>
             <Route path="/virtualmonitoring/:value" exact component={VirtualMonitoring}></Route>
             <Route path="/livemonitoring" exact component={LiveMonitoring}></Route>
             <Route path="/home" exact component={Home}></Route>
