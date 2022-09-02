@@ -29,6 +29,7 @@ export const countersService = (service) => API.get('/services/counters', servic
 
 export const signIn = (values) => API.post('/customers/signin', values);
 export const signUp = (values) => API.post('/customers/signup', values);
+export const otpauth = (values) => API.post('/customers/otpauth', values);
 export const monitorTicket = (value) => API.post(`/customers/monitor/${value}`);
 export const monitorTicketByCode = (value) => API.post(`/customers/monitorbycode`, value);
 

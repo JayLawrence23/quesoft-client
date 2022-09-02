@@ -8,7 +8,22 @@ export const signin = (values, history, setIsValid) => async (dispatch) => {
         const { data } = await api.signIn(values);
         
         dispatch({ type: AUTH, data});
-        history.push('/otp');
+        history.push(`/otp/${data.mobile}`);
+        // dispatch({type: FETCH_ALL, payload: data});
+    } catch (error) {
+        console.log(error.message);
+        setIsValid(true);
+        
+    }
+}
+
+export const otpauth = (values, history, setIsValid) => async (dispatch) => {
+    try {
+        // log in the user ...
+        const { data } = await api.otpauth(values);
+        
+        dispatch({ type: AUTH, data});
+        history.push('/signcode');
         // dispatch({type: FETCH_ALL, payload: data});
     } catch (error) {
         console.log(error.message);
@@ -51,7 +66,7 @@ export const signup = (values, history, setIsValid) => async (dispatch) => {
         
         dispatch({ type: AUTH, data});
 
-        history.push('/otp');
+        history.push(`/otp/${data.mobile}`);
         // dispatch({type: FETCH_ALL, payload: data});
     } catch (error) {
         console.log(error.message);

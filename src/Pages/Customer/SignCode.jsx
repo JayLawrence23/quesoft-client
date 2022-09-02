@@ -1,12 +1,12 @@
-import { Grid, Typography, makeStyles, Container, Paper, Button } from '@material-ui/core'
+import { Grid, Typography, makeStyles, Container, Paper, Button, Divider } from '@material-ui/core'
 import React, { useState } from 'react';
-import { useHistory, useParams } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
 import Controls from '../../Components/Controls/Controls'
 import Layout from '../../Components/Layout'
 import { Form, useForm } from '../../Components/useForm'
-import { otpauth } from '../../Actions/customerAuth'
+import { monitorTicketByCode } from '../../Actions/customerAuth'
 import AlertMessage from '../../Components/AlertMessage'
 
 
@@ -33,25 +33,21 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
+const initialFValues = {
+    code: '',
+}
 
-
-const CustomerOTP = () => {
+const SignCode = () => {
 
     const classes = useStyles();
     const history = useHistory();
     const [isValid, setIsValid] = useState(false);
     const dispatch = useDispatch();
-    const { mobile } = useParams();
-    const initialFValues = {
-        otp: '',
-        mobile: mobile
-    }
     const { values, setValues, errors, setErrors, resetForm, handleInputChange } = useForm(initialFValues);
 
-    
     const validate = () => {
         let temp = {}
-        temp.otp = values.otp ? "" : "This field is required."
+        temp.code = values.code ? "" : "This field is required."
 
         setErrors({
             ...temp
@@ -64,14 +60,9 @@ const CustomerOTP = () => {
         e.preventDefault(); //To not refresh the form after clickng submit
        
         if(validate()){
-            dispatch(otpauth(values, history, setIsValid));
+            dispatch(monitorTicketByCode(values, history, setIsValid));
         }
     }
-
-    const handleSignIn = () => {
-        history.push("/signup");
-    }
-
 
     return (
         <Layout>
@@ -82,37 +73,30 @@ const CustomerOTP = () => {
                     <AlertMessage severity="error" message="Invalid Code."/>)
                 }
                         
-                    <Typography component="h6" variant="h6" gutterBottom>One Time Password</Typography>
+                    <Typography component="h6" variant="h6">Enter the code on the ticket:</Typography>
 
-                    <Typography component="p" variant="body1">To verify your account, please complete the following verification.</Typography>
-                    <Typography component="p" variant="body1">Check your SMS.</Typography>
-                    
                     <Form>
                         <Grid container>
+                    
                             <Controls.Input
-                                name="otp"
-                                value={ values.otp || ""}
-                                label="Enter code"
-                                onChange={handleInputChange}
-                                error={errors.otp}
+                                name="code"
+                                value={ values.code || ""}
+                                label="Code"
+                                onChange={ handleInputChange}
+                                error={errors.code}
                                 fullWidth
                             />
 
                             <Controls.Button
-                                text="Next" 
+                                text="Monitor" 
                                 type="submit"
                                 className={classes.btn}
                                 onClick={handleSubmit}
                             />
+                           
+              
+                          
 
-                            <Controls.Button
-                                variant="outlined"
-                                text="Resend Code" 
-                                type="submit"
-                                className={classes.btn}
-                                // onClick={handleSubmit}
-                            />
-                            
                         </Grid>
                     </Form>
                 </Paper>
@@ -121,4 +105,4 @@ const CustomerOTP = () => {
     )
 }
 
-export default CustomerOTP;
+export default SignCode
