@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux';
 import Controls from '../../Components/Controls/Controls'
 import Layout from '../../Components/Layout'
 import { Form, useForm } from '../../Components/useForm'
-import { monitorTicketByCode } from '../../Actions/customerAuth'
+import { signTicket } from '../../Actions/customerAuth'
 import AlertMessage from '../../Components/AlertMessage'
 
 
@@ -33,16 +33,19 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
-const initialFValues = {
-    code: '',
-}
+
 
 const SignCode = () => {
 
     const classes = useStyles();
     const history = useHistory();
     const [isValid, setIsValid] = useState(false);
+    const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
     const dispatch = useDispatch();
+    const initialFValues = {
+        code: '',
+        mobile: user?.mobile,
+    }
     const { values, setValues, errors, setErrors, resetForm, handleInputChange } = useForm(initialFValues);
 
     const validate = () => {
@@ -60,7 +63,7 @@ const SignCode = () => {
         e.preventDefault(); //To not refresh the form after clickng submit
        
         if(validate()){
-            dispatch(monitorTicketByCode(values, history, setIsValid));
+            dispatch(signTicket(values, history, setIsValid));
         }
     }
 

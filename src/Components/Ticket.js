@@ -178,7 +178,7 @@ const Ticket = ( { ticketNo, serviceName, isQRShow, predictedWait, code, email, 
                 </Typography>
                 { isQR ?
                 <>
-                    <Qrcode value={`https://quesoft.vercel.app/virtualmonitoring/${code}`} className={classes.qrcode}/>
+                    <Qrcode value={`https://quesoft.vercel.app/virtualmonitoring`} className={classes.qrcode}/>
                     
                     <div className={classes.bite} style={{ right: -12, bottom: '19%' }}></div>
                     <div className={classes.bite} style={{ left: -12, bottom: '19%'}}></div>

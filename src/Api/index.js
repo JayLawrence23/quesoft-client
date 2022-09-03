@@ -31,6 +31,7 @@ export const signIn = (values) => API.post('/customers/signin', values);
 export const signUp = (values) => API.post('/customers/signup', values);
 export const otpauth = (values) => API.post('/customers/otpauth', values);
 export const monitorTicket = (value) => API.post(`/customers/monitor/${value}`);
+export const signTicket = (value) => API.post(`/customers/signticket`, value);
 export const monitorTicketByCode = (value) => API.post(`/customers/monitorbycode`, value);
 
 export const createCounterStaff = (values) => API.post('/counterstaff/signup', values);
