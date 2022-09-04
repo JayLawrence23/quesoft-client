@@ -10,7 +10,7 @@ import { monitorTicket } from '../../Actions/customerAuth';
 import { leaveQueuing } from '../../Actions/services';
 import { getTransactions, leaveQueuesWaiting, emailNotif, smsNotif } from '../../Actions/transaction';
 import Controls from '../../Components/Controls/Controls';
-import Layout from '../../Components/Layout';
+import CustomerLayout from '../../Components/CustomerLayout';
 import Ticket from '../../Components/Ticket';
 import { Form, useForm } from '../../Components/useForm'
 import Faqs from '../../Components/Faqs';
@@ -29,6 +29,7 @@ const VirtualMonitoring = () => {
 
     const dispatch = useDispatch();
     const { value } = useParams();
+    const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
     const initialFValues = {
         code: value,
         sms: '',
@@ -38,7 +39,6 @@ const VirtualMonitoring = () => {
     //For Now Serving
     const  {ticket, waiting} = useSelector((state) => state.ticket)
     const  { monitor } = useSelector((state) => state.customerAuth)
-    const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
     const [openDialog, setOpenDialog] = useState(false);
     const [alignment, setAlignment] = useState('left');
     const [agree, setAgree] = useState(false);
@@ -155,7 +155,7 @@ const VirtualMonitoring = () => {
     }, [socket]);
    
     return (
-        <Layout>
+        <CustomerLayout>
             <Paper className={classes.bodycontainer}>
                 { monitor && (monitor.status === "Waiting" || monitor.status === "Calling")? 
                 <Grid container className={classes.root} spacing={3}>
@@ -422,7 +422,7 @@ const VirtualMonitoring = () => {
                 </Button>
                 </DialogActions>
             </Dialog>
-        </Layout>
+        </CustomerLayout>
     );
 }
 

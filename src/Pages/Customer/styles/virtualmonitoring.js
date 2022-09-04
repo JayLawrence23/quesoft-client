@@ -19,7 +19,8 @@ const useStyles = makeStyles((theme) => ({
     bodycontainer: {
         maxWidth: 480,
         marginInline: 'auto',
-        marginBlock: '3.5rem'
+        marginBlock: '3.5rem',
+        marginBottom: '5.8rem',
     },
     backbutton: {
         border: '1px ' + theme.palette.primary[500] + ' solid',
