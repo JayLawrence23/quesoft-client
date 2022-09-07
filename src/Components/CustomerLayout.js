@@ -7,6 +7,7 @@ import { grey, pink } from '@material-ui/core/colors'
 import { alpha } from '@material-ui/core/styles';
 
 import React from 'react';
+import { useHistory } from 'react-router';
 
 import logo from '../Assets/Images/logo-que.png';
 
@@ -77,6 +78,10 @@ const useStyles = makeStyles((theme) => {
         iconactive: {
             color: theme.palette.secondary[600],
             fontSize: 26
+        },
+        iconbutton: {
+            display: 'flex',
+            flexDirection: 'column',
         }
     }
 })
@@ -84,6 +89,7 @@ const useStyles = makeStyles((theme) => {
 const CustomerLayout = ({ children }) => {
 
     const classes = useStyles();
+    const history = useHistory();
 
     return ( 
         <div className={classes.root}>
@@ -122,18 +128,38 @@ const CustomerLayout = ({ children }) => {
             <AppBar position="fixed" color="primary" className={classes.botAppBar}>
                 <Toolbar className={classes.centertoolbar}>
                     <div className={classes.navbar}>
-                        <IconButton edge="start" color="primary" aria-label="open drawer">
+                        <IconButton 
+                            edge="start" 
+                            color="primary" 
+                            aria-label="open drawer" 
+                            classes={{label: classes.iconbutton}}
+                            onClick={() => history.push("/main")}
+                        >
                             <HomeOutlinedIcon />
+                            <Typography variant="body2">
+                                Home
+                            </Typography>
                         </IconButton>
-                        {/* <Fab color="secondary" aria-label="add" className={classes.fabButton}>
-                            <AddIcon />
-                        </Fab> */}
-                        {/* <div className={classes.grow} /> */}
-                        <IconButton color="primary">
+                        <IconButton 
+                            color="primary" 
+                            classes={{label: classes.iconbutton}}
+                            onClick={() => history.push("/customertrans")}
+                        >
                             <ReceiptOutlinedIcon />
+                            <Typography variant="body2">
+                                Transaction
+                            </Typography>
                         </IconButton>
-                        <IconButton edge="end" color="primary">
+                        <IconButton 
+                            edge="end" 
+                            color="primary" 
+                            classes={{label: classes.iconbutton}}
+                            onClick={() => history.push("/customeracc")}
+                        >
                             <AccountCircleOutlinedIcon />
+                            <Typography variant="body2">
+                                Account
+                            </Typography>
                         </IconButton>
                     </div>
                 </Toolbar>

@@ -1,12 +1,12 @@
-import Layout from '../../Components/Layout';
-import Table from '../../Components/Table';
-
+import CustomerLayout from '../../Components/CustomerLayout';
 
 const Transactions = () => {
     return (
-        <Layout>
-            <Table />
-        </Layout>
+        <CustomerLayout>
+            <div>
+                Hello World
+            </div>
+        </CustomerLayout>
     );
 }
 
