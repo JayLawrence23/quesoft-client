@@ -97,6 +97,13 @@ const SignCode = () => {
                                 onClick={handleSubmit}
                             />
                            
+                           
+                           <Controls.Button
+                                text="Continue to Home" 
+                                className={classes.btn}
+                                variant="outlined"
+                                onClick={() => history.push('/main')}
+                            />
               
                           
 
