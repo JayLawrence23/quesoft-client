@@ -1,5 +1,5 @@
 import * as api from '../Api';
-import { AUTH, MONITOR } from '../Constants/actionTypes'
+import { AUTH, MONITOR, UPDATE_CUSTOMER, LOGOUT } from '../Constants/actionTypes'
 
 // Action Creators
 export const signin = (values, history, setIsValid) => async (dispatch) => {
@@ -96,6 +96,19 @@ export const emailNotif = (values, setIsError, setIsSuccess) => async (dispatch)
     try {
         // sign up the user ...
         await api.createCounterStaff(values);
+        setIsSuccess(true);
+    } catch (error) {
+        console.log(error.message);
+        setIsError(true);
+    }
+}
+
+export const updateCustomer = (id, values, setIsError, setIsSuccess) => async (dispatch) => {
+    try {
+        
+        const { data } = await api.updateCustomer(id, values);
+
+        dispatch({ type: UPDATE_CUSTOMER, payload: data });
         setIsSuccess(true);
     } catch (error) {
         console.log(error.message);

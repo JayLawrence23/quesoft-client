@@ -106,17 +106,6 @@ const CustomerLayout = ({ children }) => {
                             </Typography>
                             
                         </div>
-                        {/* <Typography className={classes.date}>
-                            Today is the { format(new Date(), 'do MMMM Y')}
-                        </Typography> */}
-
-                    {/* <IconButton aria-label="show 11 new notifications" color="inherit">
-                        <Badge badgeContent={10} color="secondary">
-                            <Notifications color="primary"/>
-                        </Badge>
-                    </IconButton> */}
-                    <Button color="primary" >Logout</Button>
-                    
                 </Toolbar>
             </AppBar>
 

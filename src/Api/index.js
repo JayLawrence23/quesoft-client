@@ -1,7 +1,8 @@
 import axios from 'axios';
 
 // const baseURL = 'http://localhost:5000';
-const baseURL = 'https://quesoft.herokuapp.com';
+// const baseURL = 'https://quesoft.herokuapp.com';
+const baseURL = 'https://quesoft.onrender.com';
 
 const API = axios.create({ baseURL});
 
@@ -33,6 +34,7 @@ export const otpauth = (values) => API.post('/customers/otpauth', values);
 export const monitorTicket = (value) => API.post(`/customers/monitor/${value}`);
 export const signTicket = (value) => API.post(`/customers/signticket`, value);
 export const monitorTicketByCode = (value) => API.post(`/customers/monitorbycode`, value);
+export const updateCustomer = (id, values) => API.patch(`/customers/${id}`, values);
 
 export const createCounterStaff = (values) => API.post('/counterstaff/signup', values);
 export const signInCounterStaff = (values) => API.post('/counterstaff/signin', values);
