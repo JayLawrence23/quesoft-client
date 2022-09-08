@@ -1,12 +1,12 @@
 import * as api from '../Api';
-import { AUTH, MONITOR, UPDATE_CUSTOMER, LOGOUT } from '../Constants/actionTypes'
+import { AUTH, MONITOR, UPDATE_CUSTOMER } from '../Constants/actionTypes'
 
 // Action Creators
 export const signin = (values, history, setIsValid) => async (dispatch) => {
     try {
         // log in the user ...
         const { data } = await api.signIn(values);
-        
+        console.log(values)
         dispatch({ type: AUTH, data});
         history.push(`/otp/${data.mobile}`);
         // dispatch({type: FETCH_ALL, payload: data});
