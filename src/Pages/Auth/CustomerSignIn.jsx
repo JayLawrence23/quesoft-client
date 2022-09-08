@@ -62,6 +62,7 @@ const CustomerSignIn = () => {
        
         if(validate()){
             dispatch(signin(values, history, setIsValid));
+            console.log('VALIDATE')
         }
     }
 
