@@ -8,6 +8,7 @@ import PieChart from "../../../Components/Charts/PieChart";
 import { countWaiting, countMissed, countServed } from '../../../Actions/transaction';
 import AveServBarChart from '../../../Components/Charts/AveServBarChart';
 import AveServPieChart from '../../../Components/Charts/AveServPieChart';
+import GeneratePDF from './GeneratePDF';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -112,6 +113,12 @@ const Dashboard = () => {
                                     <Box fontSize={20}>Missed</Box>
                                     <Box fontWeight="fontWeightBold" fontSize={30}>{countMissedAll}</Box>
                                 </Typography>
+                            </Paper>
+                        </Grid>
+
+                        <Grid item md={3} xs={12}>
+                            <Paper elevation={0} className={classes.monitorpaper}>
+                                <GeneratePDF />
                             </Paper>
                         </Grid>
                     </Grid>
