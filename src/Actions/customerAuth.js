@@ -6,7 +6,6 @@ export const signin = (values, history, setIsValid) => async (dispatch) => {
     try {
         // log in the user ...
         const { data } = await api.signIn(values);
-        console.log(values)
         dispatch({ type: AUTH, data});
         history.push(`/otp/${data.mobile}`);
         // dispatch({type: FETCH_ALL, payload: data});
