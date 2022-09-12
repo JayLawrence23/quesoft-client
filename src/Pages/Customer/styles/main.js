@@ -157,6 +157,12 @@ const useStyles = makeStyles((theme) => ({
     },
     heading: {
         fontWeight: 600,
+    },
+    cell: {
+        background: '#F7F7F7',
+        paddingBlock: 7,
+        paddingInline: 6,
+        borderBottom: '2px #D3D3D3 solid', 
     }
 }));
 
