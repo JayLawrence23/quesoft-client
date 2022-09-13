@@ -97,3 +97,5 @@ export const showMissed = (values) => API.post('/transaction/showmissed/', value
 export const searchMissedByService = (values) => API.post('/transaction/searchmissed/', values);
 export const serveMissedTicket = (values) => API.post('/transaction/servemissed/', values);
 export const completeMissedTicket = (values) => API.post('/transaction/completemissed/', values);
+
+export const transHistory = (values) => API.post(`/transaction/customerhistory/`, values);

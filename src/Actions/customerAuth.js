@@ -1,5 +1,5 @@
 import * as api from '../Api';
-import { AUTH, MONITOR, UPDATE_CUSTOMER } from '../Constants/actionTypes'
+import { AUTH, MONITOR, UPDATE_CUSTOMER, TRANSHISTORY} from '../Constants/actionTypes'
 
 // Action Creators
 export const signin = (values, history, setIsValid) => async (dispatch) => {
@@ -112,5 +112,16 @@ export const updateCustomer = (id, values, setIsError, setIsSuccess) => async (d
     } catch (error) {
         console.log(error.message);
         setIsError(true);
+    }
+}
+
+export const transHistory = (id) => async (dispatch) => {
+    try {
+        
+        const { data } = await api.transHistory(id);
+
+        dispatch({ type: TRANSHISTORY, payload: data });
+    } catch (error) {
+        console.log(error.message);
     }
 }

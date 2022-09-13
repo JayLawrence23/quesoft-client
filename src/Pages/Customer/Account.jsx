@@ -91,7 +91,7 @@ const Account = () => {
                                     variant="h4"
                                     color="main"
                                     component="overline"
-                                    className={classes.welcometitle}
+                                    className={classes.displayname}
                                     gutterBottom
                                     noWrap
                                 >

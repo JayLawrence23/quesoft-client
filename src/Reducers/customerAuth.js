@@ -1,6 +1,6 @@
-import { AUTH, LOGOUT, MONITOR, UPDATE_CUSTOMER } from '../Constants/actionTypes'
+import { AUTH, LOGOUT, MONITOR, UPDATE_CUSTOMER, TRANSHISTORY } from '../Constants/actionTypes'
 
-const customerAuth = (state = { customerAuthData: null, monitor: null }, action) => {
+const customerAuth = (state = { customerAuthData: null, monitor: null, transhistory: null }, action) => {
     switch(action.type){
         case AUTH:
             localStorage.setItem('profile', JSON.stringify({...action?.data}));
@@ -14,6 +14,8 @@ const customerAuth = (state = { customerAuthData: null, monitor: null }, action)
         case UPDATE_CUSTOMER: 
             localStorage.setItem('profile', JSON.stringify({...action.payload}));
             return {...state, customerAuthData: action.payload };
+        case TRANSHISTORY: 
+            return {...state, transhistory: action.payload };
         default:
             return state;
     }

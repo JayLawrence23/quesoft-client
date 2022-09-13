@@ -163,7 +163,21 @@ const useStyles = makeStyles((theme) => ({
         paddingBlock: 7,
         paddingInline: 6,
         borderBottom: '2px #D3D3D3 solid', 
-    }
+    },
+    statuscomplete: {
+        background: '#00674C',
+        color: '#FFF',
+        padding: 6,
+        borderRadius: 6,
+        fontSize: 11
+    },
+    statuscancel: {
+        background: '#C08A28',
+        color: '#FFF',
+        padding: 6,
+        borderRadius: 6,
+        fontSize: 11
+    },
 }));
 
 export default useStyles;

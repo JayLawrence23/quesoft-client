@@ -10,6 +10,7 @@ export const AUTH = 'AUTH';
 export const LOGOUT = 'LOGOUT';
 export const MONITOR = 'MONITOR';
 export const UPDATE_CUSTOMER = 'UPDATE_CUSTOMER';
+export const TRANSHISTORY = 'TRANSHISTORY';
 
 export const AUTH_COUNTERSTAFF = 'AUTH_COUNTERSTAFF';
 export const LOGOUT_COUNTERSTAFF = 'LOGOUT_COUNTERSTAFF';
