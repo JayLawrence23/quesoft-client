@@ -117,20 +117,31 @@ const  Code = () => {
                                 
                             </Grid>
 
-                            <Controls.Button
-                                text="Create an account to track your visits. Sign Up." 
-                                variant="outlined"
-                                className={classes.btn}
-                                onClick={handleSignUp}
-                            />
+                            <Grid item xs={12}>
+                                <Button
+                                    className={classes.btn}
+                                    onClick={handleSignUp}
+                                    size="small"
+                                >
+                                    Create an account to track your visits. Sign Up.
+                                </Button> 
+                                
+                            </Grid>
 
+                            <Grid item xs={12}>
+                                <Button
+                                    //type="submit"
+                                    className={classes.btn}
+                                    onClick={handleSignIn}
+                                    size="small"
+                                >
+                                    Already have an account? Sign In.
+                                </Button>
+                                
+                            </Grid>
+                           
 
-                           <Controls.Button
-                                text="Already have an account? Sign In." 
-                                //type="submit"
-                                className={classes.btn}
-                                onClick={handleSignIn}
-                            />
+                          
                           
 
                         </Grid>
