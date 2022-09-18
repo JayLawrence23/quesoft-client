@@ -24,18 +24,22 @@ const useStyles = makeStyles((theme) => ({
 const GeneratePDF = () => {
 
     const classes = useStyles();
-    // const initialFValues = {
-    //     aveServiceTime: '',
-    //     numcustomer: '',
-    //     largestVol: '',
-    // }
-
     const initialFValues = {
-        name: 'Jay',
-        receiptId: 24,
-        price1: 4233,
-        price2: 2424
+        aveServiceTime: '',
+        numcustomer: '',
+        largestVol: '',
+        mostService: '',
+        virtualRate: '',
+        missedQueues: '',
+        leaveQueues: '',
     }
+
+    // const initialFValues = {
+    //     name: 'Jay',
+    //     receiptId: 24,
+    //     price1: 4233,
+    //     price2: 2424
+    // }
     const handleDownload = () => {
         API.post('/create-pdf', initialFValues)
         .then(() => API.get('fetch-pdf', { responseType: 'blob'}))
