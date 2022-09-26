@@ -1,8 +1,14 @@
-import React from 'react'
+import React, { useEffect } from 'react';
 import { Button, ButtonGroup, Typography, Box, makeStyles} from '@material-ui/core';
 import ArrowDownwardOutlinedIcon from '@material-ui/icons/ArrowDownwardOutlined';
 import axios from 'axios';
 import { saveAs } from 'file-saver';
+import { servedByAllServiceReports,
+    averageServiceTimeReports,
+    volumeRateReports,
+    totalServedReports
+ } from '../../../Actions/transaction';
+import { useDispatch, useSelector } from 'react-redux';
 
 // const baseURL = 'http://localhost:5000';
 // const baseURL = 'https://quesoft.herokuapp.com';
@@ -24,22 +30,41 @@ const useStyles = makeStyles((theme) => ({
 const GeneratePDF = () => {
 
     const classes = useStyles();
-    const initialFValues = {
-        aveServiceTime: '',
-        numcustomer: '',
-        largestVol: '',
-        mostService: '',
-        virtualRate: '',
-        missedQueues: '',
-        leaveQueues: '',
-    }
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(servedByAllServiceReports());
+        dispatch(averageServiceTimeReports());
+        dispatch(volumeRateReports());
+        dispatch(totalServedReports());
+        // eslint-disable-next-line
+    }, [])
+    const  { ave, rate, numberVisitor, totalVolume } = useSelector((state) => state.dashboard);
 
     // const initialFValues = {
-    //     name: 'Jay',
-    //     receiptId: 24,
-    //     price1: 4233,
-    //     price2: 2424
+    //     aveServiceTime: '',
+    //     numcustomer: '',
+    //     largestVol: '',
+    //     mostService: '',
+    //     virtualRate: '',
+    //     missedQueues: '',
+    //     leaveQueues: '',
     // }
+
+    const initialFValues = {
+        ave: ave,
+        rate: rate,
+        numberVisitor: numberVisitor,
+        totalVolume: totalVolume
+    }
+    // console.log(sample);
+
+    // const initialFValues = {
+    //     ave: 25,
+    //     rate: 24,
+    //     numberVisitor: numberVisitor,
+    //     totalVolume: totalVolume
+    // }
+
     const handleDownload = () => {
         API.post('/create-pdf', initialFValues)
         .then(() => API.get('fetch-pdf', { responseType: 'blob'}))

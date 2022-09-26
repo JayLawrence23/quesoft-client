@@ -11,7 +11,11 @@ import {
     FETCH_NUMBER_MISSED_ALL,
     FETCH_NUMBER_SERVED_ALL,
     FETCH_TOTAL_NUMBER_SERVED,
-    FETCH_AVERAGE_SERVICETIME
+    FETCH_AVERAGE_SERVICETIME,
+    FETCH_AVEREPORTS,
+    FETCH_RATE,
+    FETCH_TOTALVOL,
+    FETCH_TOTALVISITOR
 } from '../Constants/actionTypes'
 // Action Creators
 
@@ -210,6 +214,52 @@ export const averageServiceTime = () => async (dispatch) => {
         const { data } = await api.averageServiceTime();
 
         dispatch({ type: FETCH_AVERAGE_SERVICETIME, payload: data });
+    } catch (error) {
+        console.log(error.message);
+    }
+}
+
+// Reports
+
+export const servedByAllServiceReports = () => async (dispatch) => {
+    
+    try {
+        const { data } = await api.servedByAllServiceReports();
+
+        dispatch({ type: FETCH_TOTALVISITOR, payload: data });
+    } catch (error) {
+        console.log(error.message);
+    }
+}
+
+export const averageServiceTimeReports = () => async (dispatch) => {
+    
+    try {
+        const { data } = await api.averageServiceTimeReports();
+
+        dispatch({ type: FETCH_AVEREPORTS, payload: data });
+    } catch (error) {
+        console.log(error.message);
+    }
+}
+
+export const volumeRateReports = () => async (dispatch) => {
+    
+    try {
+        const { data } = await api.volumeRateReports();
+
+        dispatch({ type: FETCH_RATE, payload: data });
+    } catch (error) {
+        console.log(error.message);
+    }
+}
+
+export const totalServedReports = () => async (dispatch) => {
+    
+    try {
+        const { data } = await api.totalServedReports();
+
+        dispatch({ type: FETCH_TOTALVOL, payload: data });
     } catch (error) {
         console.log(error.message);
     }

@@ -99,3 +99,8 @@ export const serveMissedTicket = (values) => API.post('/transaction/servemissed/
 export const completeMissedTicket = (values) => API.post('/transaction/completemissed/', values);
 
 export const transHistory = (values) => API.post(`/transaction/customerhistory/`, values);
+
+export const servedByAllServiceReports = () => API.post('/transaction/servedallreports/');
+export const averageServiceTimeReports = () => API.post('/transaction/aveservicetimereports/');
+export const volumeRateReports = () => API.post('/transaction/customerslastmonthreports/');
+export const totalServedReports = () => API.post('/transaction/totalservedreports/');
